@@ -496,6 +496,137 @@
       line-height: 1.45;
     }
 
+    .brief-button {
+      justify-self: start;
+      border: 1px solid var(--line);
+      background: #17211f;
+      color: #fff;
+      border-radius: 8px;
+      margin-top: 10px;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .brief-button:hover {
+      background: #22322f;
+    }
+
+    .brief-dialog {
+      width: min(920px, calc(100vw - 28px));
+      max-height: min(820px, calc(100vh - 28px));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0;
+      color: var(--ink);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .brief-dialog::backdrop {
+      background: rgba(23, 33, 31, 0.58);
+    }
+
+    .brief-shell {
+      display: grid;
+      max-height: inherit;
+      background: #fff;
+    }
+
+    .brief-top {
+      display: grid;
+      gap: 8px;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      background: #f7f7f1;
+    }
+
+    .brief-title-row {
+      display: flex;
+      gap: 12px;
+      align-items: start;
+      justify-content: space-between;
+    }
+
+    .brief-top h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.12;
+    }
+
+    .brief-close {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .brief-body {
+      overflow: auto;
+      padding: 18px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .brief-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+      gap: 14px;
+    }
+
+    .brief-block {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+      display: grid;
+      gap: 10px;
+    }
+
+    .brief-block h3,
+    .brief-block h4 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .brief-block p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .brief-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.48;
+    }
+
+    .brief-list li + li {
+      margin-top: 6px;
+    }
+
+    .brief-history {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfbf7;
+      padding: 12px 14px;
+    }
+
+    .brief-history summary {
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .brief-history div {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
     .decision-list {
       display: grid;
       gap: 10px;
@@ -604,6 +735,10 @@
         grid-template-columns: 1fr;
       }
 
+      .brief-grid {
+        grid-template-columns: 1fr;
+      }
+
       .segmented {
         width: 100%;
         overflow-x: auto;
@@ -699,6 +834,10 @@
     </main>
   </div>
 
+  <dialog class="brief-dialog" id="briefDialog">
+    <div class="brief-shell" id="briefDialogContent"></div>
+  </dialog>
+
   <script>
     const stateKey = "japan-korea-dashboard-v1";
     const saved = JSON.parse(localStorage.getItem(stateKey) || "{}");
@@ -745,6 +884,180 @@
       { date: "Sep 16", base: "Seoul", who: "All four", travel: "Local Seoul touring", agenda: "Palace, Bukchon Hanok Village, Insa-dong, shopping/cafes, polished dinner or lounge." },
       { date: "Sep 17/18", base: "In transit", who: "All four", travel: "Fly Seoul/Incheon to SFO", agenda: "Return home." }
     ];
+
+    const dayBriefs = {
+      "Aug 20": {
+        title: "Arrival Day: Tokyo Airport To Kyoto",
+        overview: "This is a logistics and recovery day. The big idea is to land in Tokyo, get yourselves onto the bullet train system, and reach Kyoto without trying to make the day prove anything. Kyoto is the old imperial capital and will feel calmer than Tokyo once you are settled.",
+        timeline: ["Land, clear immigration, pick up luggage, and get oriented before moving on.", "Take the train connection from Tokyo toward Kyoto. Build in patience here: stations are efficient but huge.", "Check in, unpack lightly, and keep dinner close to the hotel.", "Optional evening: a short garden or riverside walk only if energy is genuinely good."],
+        food: "Choose easy Kyoto comfort: hotel dining, simple noodles, tempura, or a quiet izakaya. This is not the night for a hard-to-find reservation.",
+        tour: "No tour commitment. The win is a smooth transfer and an early night.",
+        tips: ["Use luggage forwarding if the hotel or concierge can arrange it for later moves.", "Keep passports and train tickets/cards in one small pouch.", "Do not schedule a fixed dinner too early; arrival days expand."],
+        history: ["Kyoto was Japan's imperial capital for more than a thousand years, from 794 until the emperor moved to Tokyo in the late 1800s.", "The city is laid out with an old court-capital logic: temples, gardens, tea houses, narrow lanes, and districts that still carry centuries of cultural memory.", "Arriving here first is a good rhythm: Kyoto gives context before Tokyo gives scale."]
+      },
+      "Aug 21": {
+        title: "Kyoto Cultural Day: Tea, Higashiyama, Kiyomizu-dera, Gion",
+        overview: "This is the day Kyoto starts to make sense. The route should feel like stepping through old Kyoto: hillside lanes, temple gates, small shops, tea culture, and Gion's traditional entertainment district. A guide is useful because the individual names do not mean much until someone turns them into a story.",
+        timeline: ["Late morning: tea ceremony or guide pickup at the hotel.", "Midday: Higashiyama lanes and Kiyomizu-dera area, with time for small shops and views.", "Afternoon: one strong garden or temple, then Gion at a gentle pace.", "Evening: refined Kyoto dinner, ideally close enough that the day does not become a forced march."],
+        food: "Look for Kyoto-style lunch or a quiet cafe in Higashiyama. Dinner can be Four Seasons EMBA, concierge-arranged kaiseki, or a polished neighborhood restaurant.",
+        tour: "Best committed block: a 3-4 hour private Kyoto cultural walk with a 10:00 or 10:30 start. Tea ceremony can be separate or folded in only if it does not make the day too long.",
+        tips: ["Wear shoes that slip on and off easily; temples and tea settings may require it.", "Start later and stay selective. Kyoto is better absorbed than conquered.", "Ask the guide to explain what you are seeing before the group enters each site."],
+        history: ["Kiyomizu-dera is one of Kyoto's most famous temples, known for its wooden stage built into the hillside and views over the city.", "Higashiyama means eastern mountains; its lanes preserve the feel of old Kyoto better than many checklist routes.", "Gion is associated with geiko and maiko culture. It is not a theme park; the etiquette is to observe quietly and avoid intrusive photography."]
+      },
+      "Aug 22": {
+        title: "Hiroshima Day Trip: Peace Memorial Context",
+        overview: "This is the serious, reflective day of the Kyoto segment. The goal is not to see everything in Hiroshima; it is to understand the Peace Memorial Park and museum with enough context that the visit feels human rather than abstract.",
+        timeline: ["Morning: train from Kyoto to Hiroshima, with a calm buffer for station navigation.", "Late morning or midday: meet a guide at Hiroshima Station or near Peace Memorial Park.", "Core visit: Peace Memorial Park, A-Bomb Dome, museum, and memorials.", "Late afternoon: decide whether to return directly or extend only if everyone has energy."],
+        food: "Hiroshima is known for Hiroshima-style okonomiyaki, a layered savory pancake often made with noodles. It can be a good casual lunch if timing works.",
+        tour: "Preferred tour shape: Hiroshima-focused private guide for 2.5-3.5 hours. Miyajima should remain optional because it turns the day into a much bigger undertaking.",
+        tips: ["Do not overpack this day emotionally or logistically.", "Bring water and keep lunch flexible.", "If adding Miyajima, accept that the day becomes long and the return may be late."],
+        history: ["On August 6, 1945, Hiroshima became the first city struck by an atomic bomb. The Peace Memorial Park is built around remembrance, testimony, and the hope of nuclear disarmament.", "The A-Bomb Dome was one of the few structures left standing near the hypocenter and is now a UNESCO World Heritage Site.", "Modern Hiroshima is also a rebuilt, living city, which is part of the point: the visit is about loss, survival, and reconstruction."]
+      },
+      "Aug 23": {
+        title: "Kyoto Flexible Day: Arashiyama, Bamboo, Rickshaw, Fushimi Inari",
+        overview: "This is the scenic Kyoto day. Arashiyama is the western district with the bamboo grove, river, mountain backdrop, temples, and rickshaws. Fushimi Inari is the shrine famous for thousands of vermilion gates. You do not need to do every famous thing; choose the version that feels elegant rather than crowded.",
+        timeline: ["Late morning: Arashiyama bamboo grove before lunch if possible.", "Midday: rickshaw ride or temple/garden walk, then lunch near the river.", "Afternoon option: Fushimi Inari, or keep the day quieter with another garden.", "Evening: easy dinner and reset before moving to Tokyo the next day."],
+        food: "Arashiyama has river-view meals, tofu restaurants, sweets, and cafes. Keep lunch convenient rather than chasing a cross-town reservation.",
+        tour: "Short rickshaw plus bamboo is the cleanest experience. A walking tour works if you want more explanation of temples and gardens.",
+        tips: ["Crowds are real; treat the bamboo grove as one stop, not the whole day.", "Rickshaw is useful because it creates a contained, memorable experience without over-walking.", "If Fushimi Inari is added, go for atmosphere rather than reaching the top."],
+        history: ["Arashiyama has been a leisure and villa area since the Heian period, when aristocrats valued its river and mountain scenery.", "Bamboo has strong associations in Japanese aesthetics: verticality, quiet movement, and seasonal sound.", "Fushimi Inari is dedicated to Inari, associated with rice, prosperity, and business; the gates are donations from individuals and companies."]
+      },
+      "Aug 24": {
+        title: "Kyoto To Tokyo: Check-In And First Tokyo Evening",
+        overview: "This is a transition from old capital to megacity. The train is part of the experience: the Shinkansen is fast, orderly, and a good introduction to how Japan handles scale. Once in Tokyo, keep the first evening easy and neighborhood-based.",
+        timeline: ["Morning: check out of Kyoto without rushing.", "Midday: Shinkansen to Tokyo and transfer to the hotel.", "Afternoon: check in at The Prince Gallery Tokyo Kioicho and decompress.", "Evening: choose one nearby or west-side neighborhood: Shibuya for energy, Ebisu for dinner/drinks, Daikanyama for a stylish low-key stroll."],
+        food: "Ebisu is the most dinner-friendly of the three: polished restaurants, izakayas, wine bars, and cocktail options without Shibuya's intensity.",
+        tour: "No tour needed. This is a positioning day and a first taste of Tokyo.",
+        tips: ["Use the hotel as the anchor; Tokyo is huge and the first evening should be simple.", "Daikanyama T-Site is a good gentle stop if you want design, books, coffee, and browsing.", "Shibuya is best when you want bright lights and city energy."],
+        history: ["Tokyo was called Edo before it became the imperial capital in 1868. The city grew from the Tokugawa shogunate's power base into one of the world's largest metropolitan areas.", "Shibuya is modern youth, media, retail, and nightlife energy. Ebisu grew around a beer brewery and became a mature dining district. Daikanyama is known for design, boutiques, cafes, and a quieter residential feel."]
+      },
+      "Aug 25": {
+        title: "Tokyo Lewis-Only Day: Shibuya, Daikanyama, Ebisu",
+        overview: "This day is about contemporary Tokyo rather than temples. It can be a tailored city day: big crossing, views, design shops, cafes, and a comfortable dinner. Think of it as learning the Tokyo neighborhoods you might actually enjoy, not sightseeing for its own sake.",
+        timeline: ["Late morning: Shibuya Sky or Shibuya crossing area if visibility is good.", "Midday: Daikanyama T-Site, cafes, boutiques, and a slower wander.", "Afternoon: Ebisu or nearby neighborhoods for a drink, galleries, or rest.", "Evening: casual favorite dinner or a more polished reservation."],
+        food: "Good choices include sushi, yakitori, tonkatsu, modern izakaya, or cocktail-and-small-plates in Ebisu.",
+        tour: "No guide required unless you want a private food/drink host in the evening.",
+        tips: ["Tokyo neighborhoods are like separate cities. Pick two or three and enjoy them.", "Book Shibuya Sky ahead if it becomes important, especially for sunset.", "Plan transit by neighborhood cluster rather than bouncing across town."],
+        history: ["Shibuya became a major rail and commercial hub in the 20th century and is now shorthand for youth culture and urban spectacle.", "Daikanyama's appeal is subtle: architecture, lifestyle retail, cafes, and quiet streets.", "Ebisu takes its name from Yebisu Beer; the former brewery area helped shape the neighborhood's food-and-drink identity."]
+      },
+      "Aug 26": {
+        title: "Tokyo Arrival Day For The Group",
+        overview: "This is a merge day. Brad and Rachel arrive, so the best plan is to keep the day forgiving and make the evening about reconnecting rather than sightseeing. The goal is a smooth handoff from separate travel rhythms into the shared trip.",
+        timeline: ["Morning: Lewis flexible time, errands, laundry, or a short neighborhood walk.", "Afternoon: Goldblatts arrive and settle in.", "Early evening: simple welcome drink or hotel lounge.", "Dinner: easy shared meal, not the most ambitious reservation of the trip."],
+        food: "Choose somewhere comfortable, conversation-friendly, and not too far from the hotel. Save the serious Tokyo dining anchor for a less jet-lagged night.",
+        tour: "No tour. Protect the arrival buffer.",
+        tips: ["Do not book anything nonrefundable for the arrival window.", "Use the hotel concierge for a nearby dinner that can handle timing changes.", "A lounge drink can be the plan if dinner energy fades."],
+        history: ["Tokyo rewards pacing. Many first-time visitors try to solve it immediately; a better approach is to let the city unfold through districts over several days.", "Kioicho, where The Prince Gallery is located, sits in a central, polished part of Tokyo with good access but less chaos than Shibuya or Shinjuku."]
+      },
+      "Aug 27": {
+        title: "Old Tokyo And Gardens: Asakusa, Yanaka, Nezu, Hamarikyu",
+        overview: "This is the main shared Tokyo guide day. The goal is to show Tokyo before glass towers: temple streets, old neighborhoods, small shops, traditional lanes, and a formal garden. A private guide can connect these places so they do not feel like random names on a map.",
+        timeline: ["Late morning: guide pickup or meet in Asakusa.", "Midday: Senso-ji area and old shopping streets, with lunch nearby.", "Afternoon: Yanaka/Nezu for quieter old-town texture, or Hamarikyu/Koishikawa Korakuen for garden time.", "Evening: rest, then dinner or cocktails if energy holds."],
+        food: "Asakusa has tempura, soba, sweets, and casual snacks. Yanaka is good for cafes and small bites. Keep lunch easy so the guide block stays relaxed.",
+        tour: "Best committed block: 4-hour private guide, 10:30-ish start, focused on Asakusa plus one old-town district or garden.",
+        tips: ["Ask the guide to explain Edo-period Tokyo before starting.", "Do not combine too many far-apart districts.", "A garden is a useful visual reset after crowded temple streets."],
+        history: ["Asakusa's Senso-ji is Tokyo's oldest major temple and was historically an entertainment and pilgrimage district.", "Yanaka and Nezu survived more of Tokyo's wartime destruction and redevelopment than many areas, which is why they can feel older and more intimate.", "Tokyo gardens often began as daimyo estates, built by powerful feudal lords during the Edo period."]
+      },
+      "Aug 28": {
+        title: "Tokyo Flex Day: Gardens, Lunch, Omakase, Cocktails",
+        overview: "This is a choose-your-own Tokyo day. Since the group is not doing staged activities just to fill time, the day can become more elegant: a garden, a refined lunch, a neighborhood wander, and a strong dinner or cocktail anchor.",
+        timeline: ["Late morning: garden, museum, or slow neighborhood start.", "Lunch: refined but not overly formal.", "Afternoon: shopping, rest, or one focused experience.", "Evening: omakase, washoku, cocktail bar, or a private food walk if the group wants structure."],
+        food: "This is a good day for sushi/omakase or a serious cocktail pairing. Keep the daytime food lighter if dinner is the anchor.",
+        tour: "Optional: private Tokyo food and drink evening, or specialist garden guide if the group wants context.",
+        tips: ["Leave white space before a serious dinner.", "Tokyo reservations can be strict; arrive early and do not over-schedule beforehand.", "Use taxis strategically at night if everyone is dressed up or tired."],
+        history: ["Tokyo's best experiences are often not monuments but layers: a quiet garden beside a rail hub, a tiny bar upstairs, a department-store food hall, a shrine tucked behind commercial streets.", "Omakase means leaving the selection to the chef. It is as much about trust, seasonality, and pacing as it is about luxury."]
+      },
+      "Aug 29": {
+        title: "Fly To Sapporo: Hokkaido Begins",
+        overview: "This day shifts the trip north. Hokkaido is Japan's northern island: cooler climate, big landscapes, seafood, dairy, ramen, corn, potatoes, and a different frontier feel from Kyoto and Tokyo. Sapporo is the urban base.",
+        timeline: ["Morning or midday: fly from Tokyo to New Chitose.", "Transfer into Sapporo and check in at the InterContinental.", "Late afternoon: easy city walk or hotel reset.", "Evening: seafood, miso ramen, or a low-key Hokkaido dinner."],
+        food: "Sapporo is known for miso ramen, crab, seafood, soup curry, dairy desserts, and beer. Seafood and ramen are the easiest first-night wins.",
+        tour: "No tour needed unless arrival timing is early and the group wants a food host.",
+        tips: ["Hokkaido distances are larger than they look.", "Pack a light layer; northern evenings can feel different from Tokyo.", "Keep the first night flexible around flight timing."],
+        history: ["Hokkaido was incorporated into modern Japan later than the main islands and has a distinct history involving Ainu Indigenous culture, frontier settlement, agriculture, and colder-climate development.", "Sapporo itself is a relatively young planned city by Japanese standards, with a grid layout influenced by 19th-century urban planning."]
+      },
+      "Aug 30": {
+        title: "Otaru And Yoichi: Canal Town, Seafood, Nikka Whisky",
+        overview: "This is the Hokkaido highlight day. Otaru is a historic port town with a canal, warehouses, glass shops, music boxes, and seafood. Yoichi is nearby and famous for Nikka Whisky. The day works best with a driver or private logistics so it does not become a train-and-taxi puzzle.",
+        timeline: ["Late morning: depart Sapporo for Otaru or Yoichi.", "Midday: Nikka Yoichi distillery visit if available, with lunch before or after.", "Afternoon: Otaru canal, Sakaimachi shopping street, glass/music-box shops, and seafood.", "Evening: return to Sapporo for an easy dinner or nightcap."],
+        food: "Seafood is the priority: sushi, crab, scallops, uni if in season, or a market-style lunch. Whisky tasting should not replace lunch.",
+        tour: "Best committed block: private Otaru plus Nikka Yoichi day with car/guide. Verify distillery entry and tasting rules before booking.",
+        tips: ["Ask exactly what is included: driver only, guide, distillery reservation, lunch, and tasting.", "Do not add Sapporo beer unless the group specifically wants it.", "This day can run long, so protect the evening."],
+        history: ["Otaru prospered as a port and financial center in the late 19th and early 20th centuries; its stone warehouses and canal are reminders of that trading era.", "Nikka Whisky's Yoichi distillery was founded by Masataka Taketsuru, a central figure in Japanese whisky who studied whisky-making in Scotland.", "Yoichi was chosen partly because its climate resembled parts of Scotland, making it symbolically and practically important to Japanese whisky history."]
+      },
+      "Aug 31": {
+        title: "Sapporo To Lake Toya: Onsen And Lake Reset",
+        overview: "This is a reset day from city and touring into lake, onsen, and resort rhythm. Lake Toya is a volcanic caldera lake with big views, hot springs, and a slower pace. The point is to arrive without turning the transfer into another tour.",
+        timeline: ["Morning: check out of Sapporo and train toward Toya Station.", "Midday: local transfer to the lake hotel.", "Afternoon: check in, onsen, lake view, and decompression.", "Evening: hotel dinner and a quiet night."],
+        food: "Let the hotel handle dinner. Resort meals in onsen areas are often part of the experience and may include seasonal Hokkaido ingredients.",
+        tour: "No formal tour. Use the hotel for transfer help and any light local logistics.",
+        tips: ["Confirm hotel transfer timing from Toya Station.", "Understand onsen etiquette before arrival: wash before entering, no swimsuits unless specified, quiet atmosphere.", "This is a good laundry and recovery window."],
+        history: ["Lake Toya is part of Shikotsu-Toya National Park and was formed by volcanic activity. The surrounding landscape is shaped by volcanoes, hot springs, and caldera geography.", "Onsen culture is both practical and ritual: bathing, relaxing, and seasonal meals are part of the Japanese ryokan/resort tradition."]
+      },
+      "Sep 1": {
+        title: "Lake Toya Nature Day: Spa, Lake, Mt. Usu Option",
+        overview: "This should be the softest full day of the land trip. You can do spa, lake walks, a boat, or a light Mt. Usu / Showa-Shinzan outing. The day should feel like recovery with scenery, not a checklist.",
+        timeline: ["Morning: slow breakfast and onsen/spa time.", "Late morning or midday: optional Mt. Usu ropeway, lake walk, or boat.", "Afternoon: rest, terrace time, or light hiking.", "Evening: hotel dinner and another quiet lake night."],
+        food: "Keep food hotel-based unless the concierge has a nearby standout. The setting is the meal's main partner here.",
+        tour: "Optional local transfer or concierge-arranged nature outing. Avoid a full-day route unless the group is restless.",
+        tips: ["Check weather before choosing Mt. Usu; views matter.", "Do the active piece earlier, then preserve the afternoon.", "This is a good day to sleep in."],
+        history: ["Mt. Usu is an active volcano, and nearby Showa-Shinzan is a volcanic lava dome that rose dramatically in the 1940s.", "The Lake Toya area is a clear example of living with volcanic landscapes: beauty, hot springs, geological risk, and resort culture all in one place."]
+      },
+      "Sep 2": {
+        title: "Lake Toya To Hakodate: Port City Evening",
+        overview: "Hakodate is the bridge between Hokkaido land travel and boarding The World. It is a port city with a different look: slopes, churches, warehouses, seafood markets, and the famous night view from Mt. Hakodate.",
+        timeline: ["Morning or midday: train from Toya to Hakodate.", "Afternoon: check in and visit waterfront or Motomachi if time allows.", "Sunset/evening: Mt. Hakodate night view if weather is clear.", "Dinner: seafood, waterfront casual, or hotel-based if tired."],
+        food: "Hakodate is known for seafood, especially morning market-style bowls, squid, crab, scallops, and sushi.",
+        tour: "Self-guided is probably enough. Use a private van or hotel transfer only if luggage and timing are awkward.",
+        tips: ["Mt. Hakodate is weather-dependent; do not force it if visibility is poor.", "Keep dinner simple because boarding happens the next day.", "Confirm port transfer logistics before sleeping."],
+        history: ["Hakodate was one of Japan's first treaty ports opened to foreign trade in the 19th century, which explains its churches, Western-style buildings, and international feel.", "The city also played a role in the final conflicts around the end of the Tokugawa shogunate, including the short-lived Republic of Ezo."]
+      },
+      "Sep 3": {
+        title: "Board The World In Hakodate",
+        overview: "This is a logistics day with a major mood shift: land itinerary ends and the residential ship segment begins. The goal is a smooth transfer to the port, boarding, unpacking, and settling into ship rhythm while still technically in Hakodate.",
+        timeline: ["Morning: easy breakfast and final packing.", "Midday: transfer to Hakodate port.", "Afternoon: board The World, complete check-in, unpack, and orient yourselves.", "Evening: ship dinner or a quiet port night depending on the vessel schedule."],
+        food: "Keep breakfast easy. Once aboard, let the ship handle meals unless there is a specific port plan.",
+        tour: "No land tour unless boarding time allows a short private transfer loop. Prioritize boarding calm.",
+        tips: ["Keep passports, cruise documents, medication, and valuables in hand luggage.", "Do not bury anything needed during boarding in checked bags.", "Use this day to learn ship routines and dining options."],
+        history: ["Hakodate's port identity makes it a fitting place to board. Historically it connected Hokkaido to international trade routes; now it becomes the handoff point from land travel to coastal Japan and Korea by sea.", "The World is unusual because it is a private residential ship, so the rhythm may feel more like joining a floating community than boarding a conventional cruise."]
+      },
+      "Sep 4-14": {
+        title: "The World: Northern Japan And Korea By Sea",
+        overview: "This stretch is intentionally higher-level in the dashboard because the ship's daily programming may shape the exact plan. The likely rhythm is port days, onboard meals, lectures or events, and a slower view of northern Japan before reaching Korea.",
+        timeline: ["Port mornings: use ship briefings to choose the right depth for each stop.", "Midday: shore excursion, local walk, or onboard recovery depending on port quality.", "Afternoons: return to ship, rest, and compare notes.", "Evenings: ship dining, lounges, and watching the coastline change."],
+        food: "Let the ship do most meals unless a port has a strong local food reason. Akita and Niigata are both associated with rice and sake culture.",
+        tour: "Use The World's excursion program as the default. Add private touring only where the ship options feel too broad or too early.",
+        tips: ["Treat ship lectures and port talks as your executive briefings.", "Do not feel obligated to leave the ship at every port if the day is weak or weather is poor.", "Keep one shared note list of places worth revisiting someday."],
+        history: ["Northern Honshu is different from the Kyoto-Tokyo corridor: more regional, seasonal, and tied to rice, snow country, coastal trade, and local festivals.", "Akita is known for rural landscapes, folklore, and sake/rice culture. Niigata is famous for rice, sake, snow-country identity, and its port position on the Sea of Japan.", "Sokcho-si, on Korea's east coast, is known as a gateway to Seoraksan and has a distinct coastal food culture."]
+      },
+      "Sep 15": {
+        title: "Disembark Korea And Transfer To Seoul",
+        overview: "This is the Korea transition day. The ship segment ends, and the group moves inland to Seoul. Keep the day light: check in, reorient, and let Seoul's first impression be polished rather than rushed.",
+        timeline: ["Morning: disembark and meet private transfer.", "Midday/afternoon: drive or transfer to Seoul, depending on port logistics.", "Afternoon: check in at Four Seasons Seoul and decompress.", "Evening: light Seoul dinner, hotel lounge, or a gentle neighborhood walk."],
+        food: "Start with approachable Korean food: refined hotel Korean, barbecue if energy is high, or a simple noodle/soup meal if everyone is tired.",
+        tour: "Private transfer is the key commitment. No city tour today.",
+        tips: ["Korea will feel different immediately: language, food rhythm, urban design, and payment/transit systems.", "Use the hotel concierge for first-night dinner; do not overcomplicate it.", "Confirm the next day's guide pickup time before dinner."],
+        history: ["Seoul has been a capital for centuries, especially under the Joseon dynasty from 1392 to 1910. The palaces and old neighborhoods planned for the next day belong largely to that story.", "Modern Seoul is also a postwar megacity: fast, design-forward, food-driven, and layered with older royal, colonial, and contemporary history."]
+      },
+      "Sep 16": {
+        title: "Seoul Cultural Day: Palace, Bukchon, Insa-dong",
+        overview: "This is the compact Seoul overview. Gyeongbokgung gives the royal frame, Bukchon shows traditional hanok houses in a living neighborhood, and Insa-dong gives crafts, tea, galleries, and shopping. A guide helps make Korean history legible quickly.",
+        timeline: ["Late morning: guide pickup and Gyeongbokgung Palace.", "Midday: Bukchon Hanok Village and nearby lunch or tea.", "Afternoon: Insa-dong shops, galleries, tea, or Jogyesa Temple if nearby.", "Evening: polished dinner, Korean barbecue, or Four Seasons cocktail anchor."],
+        food: "Good fits include refined Korean, barbecue, mandu, noodles, tea house snacks, or a planned dinner at/near Four Seasons.",
+        tour: "Best committed block: 3-4 hour private palace, Bukchon, and Insa-dong walk, starting around 10:00 or 10:30.",
+        tips: ["Bukchon is residential; keep voices down and avoid treating homes like a set.", "Palace grounds are large, so ask the guide to prioritize stories over acreage.", "Leave time for tea or shopping; Insa-dong is better when unrushed."],
+        history: ["Gyeongbokgung was the main royal palace of the Joseon dynasty. It was damaged and rebuilt through periods of invasion, occupation, and restoration.", "Bukchon sits between major palaces and was historically associated with high-ranking officials and aristocratic residences.", "Insa-dong is tied to antiques, calligraphy, crafts, galleries, and traditional tea culture, making it a good soft landing into Korean aesthetics."]
+      },
+      "Sep 17/18": {
+        title: "Return Travel: Seoul/Incheon To SFO",
+        overview: "This is the departure buffer. The only real job is to get to Incheon comfortably, avoid last-minute chaos, and come home with the trip intact. If flight timing allows, keep the final morning close to the hotel.",
+        timeline: ["Morning: pack, breakfast, and final checkout.", "Transfer: allow generous time to Incheon; it is a major airport outside central Seoul.", "Airport: handle tax refunds, lounge, and boarding without rushing.", "Flight: reset watches, hydrate, and accept that re-entry will be a little surreal."],
+        food: "Final meal can be hotel breakfast, airport lounge, or one last simple Korean dish if timing allows.",
+        tour: "No tour. This is pure departure logistics.",
+        tips: ["Do not schedule meaningful sightseeing on departure day.", "Keep receipts/passports handy if doing tax refund steps.", "Put one change of clothes and essentials in carry-on."],
+        history: ["Incheon has long been Korea's gateway to the world, from port history to the modern international airport.", "Ending through Seoul after Japan gives the trip a useful contrast: two neighboring countries with shared regional influences but very different language, food, urban rhythm, and historical memory."]
+      }
+    };
 
     const tours = [
       { id: "kyoto-walk", date: "Aug 21", place: "Kyoto", who: "Lewis-only", title: "Private Kyoto cultural walk", channel: "Amex hotel concierge or private guide; Viator backup", cost: "$250-$500 total, or Viator-style $50-$90 pp", priority: "Must-book", status: "Need quote", why: "Sets the tone and avoids random temple hopping. Ask for Higashiyama, Kiyomizu-dera, Gion, and one strong garden/temple route.", links: [{ label: "Viator Kyoto private guide", url: "https://www.viator.com/en-GB/tours/Kyoto/Kyoto-Full-day-Private-Custom-Tour-with-National-Licensed-Guide/d332-92136P55" }, { label: "Amex Four Seasons Kyoto", url: "https://www.americanexpress.com/en-us/travel/discover/property/Four-Seasons-Hotel-Kyoto" }] },
@@ -865,6 +1178,56 @@
       return `<div class="link-row">${links.map(link => `<a class="tour-link" href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`).join("")}</div>`;
     }
 
+    function listItems(items = []) {
+      return items.map(item => `<li>${item}</li>`).join("");
+    }
+
+    function openBrief(date) {
+      const day = itinerary.find(item => item.date === date);
+      const brief = dayBriefs[date];
+      if (!day || !brief) return;
+      document.getElementById("briefDialogContent").innerHTML = `
+        <div class="brief-top">
+          <div class="brief-title-row">
+            <div>
+              <div class="meta">${pill(day.date)} ${pill(day.base)} ${pill(day.who)}</div>
+              <h2>${brief.title}</h2>
+            </div>
+            <button class="brief-close" id="briefClose" aria-label="Close day briefing">&times;</button>
+          </div>
+          <div class="icon-tags">${itineraryIcons(day)}</div>
+        </div>
+        <div class="brief-body">
+          <div class="brief-block">
+            <h3>Executive Read</h3>
+            <p>${brief.overview}</p>
+          </div>
+          <div class="brief-grid">
+            <div class="brief-block">
+              <h3>Rough Flow</h3>
+              <ol class="brief-list">${listItems(brief.timeline)}</ol>
+            </div>
+            <div class="brief-block">
+              <h3>Food And Reservations</h3>
+              <p>${brief.food}</p>
+              <h4>Tour / Logistics</h4>
+              <p>${brief.tour}</p>
+            </div>
+          </div>
+          <div class="brief-block">
+            <h3>Useful Tips</h3>
+            <ul class="brief-list">${listItems(brief.tips)}</ul>
+          </div>
+          <details class="brief-history">
+            <summary>Deeper history and why it matters</summary>
+            <div>${brief.history.map(item => `<p>${item}</p>`).join("")}</div>
+          </details>
+        </div>
+      `;
+      document.getElementById("briefClose").addEventListener("click", () => document.getElementById("briefDialog").close());
+      document.getElementById("briefDialog").showModal();
+    }
+
     function renderNav() {
       document.getElementById("nav").innerHTML = tabs.map(([id, label, icon]) => `
         <button class="nav-btn ${id === "overview" ? "active" : ""}" data-tab="${id}">
@@ -931,11 +1294,15 @@
                   <div class="icon-tags">${itineraryIcons(d)}</div>
                 </div>
                 <p>${d.agenda}</p>
+                <button class="brief-button" data-brief="${d.date}">Day Briefing</button>
               </div>
             </article>
           `).join("") : `<div class="empty">No itinerary rows match this view.</div>`}
         </div>
       `;
+      document.querySelectorAll("[data-brief]").forEach(btn => {
+        btn.addEventListener("click", () => openBrief(btn.dataset.brief));
+      });
     }
 
     function renderTours() {
