@@ -638,20 +638,21 @@
     ];
 
     const hotels = [
-      { stop: "Kyoto", hotel: "Four Seasons Hotel Kyoto", range: "$1,200-$2,000+", position: "5-star luxury garden oasis", fit: "Excellent wellness, service, garden setting, and access to temples/Gion." },
-      { stop: "Kyoto", hotel: "HOTEL THE MITSUI KYOTO", range: "$1,200-$1,500+", position: "Marriott Luxury Collection", fit: "Modern Kyoto luxury, elegant, calm, central, strong points angle." },
-      { stop: "Kyoto", hotel: "Six Senses Kyoto", range: "$1,065-$3,350+", position: "5-star wellness hotel", fit: "Strong wellness/spa identity and aligned with David/Tiffanie style." },
-      { stop: "Kyoto", hotel: "The Hotel Seiryu Kyoto Kiyomizu", range: "$540-$750+", position: "High-end boutique", fit: "Wonderful Higashiyama location and old-Kyoto atmosphere." },
-      { stop: "Tokyo", hotel: "Cerulean Tower Tokyu Hotel", range: "$400-$1,000+", position: "Luxury high-rise, Shibuya", fit: "Clearest Shibuya fit if Brad wants the Crossing area." },
-      { stop: "Tokyo", hotel: "The Prince Gallery Tokyo Kioicho", range: "$470-$925+", position: "5-star Marriott luxury", fit: "Excellent views and points strategy; quieter than Shibuya." },
-      { stop: "Sapporo", hotel: "InterContinental Sapporo", range: "$380-$520+", position: "5-star/new luxury", fit: "Best luxury-style base for Sapporo if available." },
-      { stop: "Lake Toya", hotel: "The Lake Suite Ko no Sumika", range: "TBD premium", position: "Luxury lake-view onsen suites", fit: "Intimate suite/onsen feel, strong for wellness and views." },
-      { stop: "Lake Toya", hotel: "The Windsor Hotel Toya", range: "TBD", position: "Luxury resort", fit: "Grand resort with larger property, views, and dining infrastructure." },
-      { stop: "Lake Toya", hotel: "The Lake View TOYA Nonokaze Resort", range: "$350-$800+", position: "Upscale lake-view onsen", fit: "Strong lake-view onsen option; all rooms oriented to Lake Toya feel." },
-      { stop: "Hakodate", hotel: "Nipponia Hotel Hakodate Minatomachi", range: "TBD", position: "Historic boutique", fit: "Atmospheric port-city stay before boarding The World." },
-      { stop: "Seoul", hotel: "Four Seasons Hotel Seoul", range: "$430-$640+", position: "5-star luxury", fit: "Best polished luxury choice for short Seoul stay." },
-      { stop: "Seoul", hotel: "Signiel Seoul", range: "$500-$800+", position: "5-star high-rise", fit: "Best skyline-and-view choice." },
-      { stop: "Seoul", hotel: "Josun Palace", range: "$465-$556+", position: "Luxury Collection", fit: "Strong if Marriott points or elite benefits are attractive." }
+      { stop: "Kyoto", dates: "Aug 20-24", hotel: "Four Seasons Hotel Kyoto", range: "$1,200-$2,000+", position: "5-star luxury garden oasis", status: "Booked", notes: "Room details TBD", fit: "Excellent wellness, service, garden setting, and access to temples/Gion." },
+      { stop: "Kyoto", dates: "Aug 20-24", hotel: "HOTEL THE MITSUI KYOTO", range: "$1,200-$1,500+", position: "Marriott Luxury Collection", status: "Backup", notes: "Not booked", fit: "Modern Kyoto luxury, elegant, calm, central, strong points angle." },
+      { stop: "Kyoto", dates: "Aug 20-24", hotel: "Six Senses Kyoto", range: "$1,065-$3,350+", position: "5-star wellness hotel", status: "Backup", notes: "Not booked", fit: "Strong wellness/spa identity and aligned with David/Tiffanie style." },
+      { stop: "Kyoto", dates: "Aug 20-24", hotel: "The Hotel Seiryu Kyoto Kiyomizu", range: "$540-$750+", position: "High-end boutique", status: "Backup", notes: "Not booked", fit: "Wonderful Higashiyama location and old-Kyoto atmosphere." },
+      { stop: "Tokyo", dates: "Aug 24-29", hotel: "The Prince Gallery Tokyo Kioicho", range: "$470-$925+", position: "5-star Marriott luxury", status: "Booked", notes: "Grand Deluxe King with Club Lounge access", fit: "Excellent views and points strategy; quieter than Shibuya." },
+      { stop: "Tokyo", dates: "Aug 24-29", hotel: "Cerulean Tower Tokyu Hotel", range: "$400-$1,000+", position: "Luxury high-rise, Shibuya", status: "Backup", notes: "Not booked", fit: "Clearest Shibuya fit if Brad wants the Crossing area." },
+      { stop: "Sapporo", dates: "Aug 29-31", hotel: "InterContinental Sapporo", range: "$380-$520+", position: "5-star/new luxury", status: "Booked", notes: "Premium Room, King Bed, Club Lounge Access", fit: "Best luxury-style base for Sapporo if available." },
+      { stop: "Lake Toya", dates: "Aug 31-Sep 2", hotel: "The Lake Suite Ko no Sumika", range: "TBD premium", position: "Luxury lake-view onsen suites", status: "Booked", notes: "Non-Smoking Corner Terrace Room; early booking 90-day discount applied", fit: "Intimate suite/onsen feel, strong for wellness and views." },
+      { stop: "Lake Toya", dates: "Aug 31-Sep 2", hotel: "The Windsor Hotel Toya", range: "TBD", position: "Luxury resort", status: "Backup", notes: "Not booked", fit: "Grand resort with larger property, views, and dining infrastructure." },
+      { stop: "Lake Toya", dates: "Aug 31-Sep 2", hotel: "The Lake View TOYA Nonokaze Resort", range: "$350-$800+", position: "Upscale lake-view onsen", status: "Backup", notes: "Not booked", fit: "Strong lake-view onsen option; all rooms oriented to Lake Toya feel." },
+      { stop: "Hakodate", dates: "Sep 2-3", hotel: "TBD", range: "TBD", position: "Pre-cruise hotel", status: "Open", notes: "Not decided yet", fit: "Need one easy night before boarding The World." },
+      { stop: "Hakodate", dates: "Sep 2-3", hotel: "Nipponia Hotel Hakodate Minatomachi", range: "TBD", position: "Historic boutique", status: "Candidate", notes: "Not booked", fit: "Atmospheric port-city stay before boarding The World." },
+      { stop: "Seoul", dates: "Sep 15-17", hotel: "Four Seasons Hotel Seoul", range: "$430-$640+", position: "5-star luxury", status: "Booked", notes: "Club Room, King Bed", fit: "Best polished luxury choice for short Seoul stay." },
+      { stop: "Seoul", dates: "Sep 15-17", hotel: "Signiel Seoul", range: "$500-$800+", position: "5-star high-rise", status: "Backup", notes: "Not booked", fit: "Best skyline-and-view choice." },
+      { stop: "Seoul", dates: "Sep 15-17", hotel: "Josun Palace", range: "$465-$556+", position: "Luxury Collection", status: "Backup", notes: "Not booked", fit: "Strong if Marriott points or elite benefits are attractive." }
     ];
 
     const decisions = [
@@ -733,12 +734,13 @@
     function renderOverview() {
       const mustBook = tours.filter(t => t.priority === "Must-book").length;
       const skipped = tours.filter(t => t.priority === "Skip").length;
+      const bookedHotels = hotels.filter(h => h.status === "Booked").length;
       const openDecisions = decisions.filter(d => getDecision(d.id) !== "Decided").length;
       document.getElementById("overview").innerHTML = `
         <div class="grid">
           <div class="panel span-3 metric"><strong>29</strong><span>calendar days including flights and cruise</span></div>
           <div class="panel span-3 metric"><strong>${mustBook}</strong><span>recommended tour blocks</span></div>
-          <div class="panel span-3 metric"><strong>${openDecisions}</strong><span>open planning decisions</span></div>
+          <div class="panel span-3 metric"><strong>${bookedHotels}</strong><span>booked hotel stays</span></div>
           <div class="panel span-3 metric"><strong>${skipped}</strong><span>experience intentionally skipped</span></div>
           <div class="panel span-12">
             <h3>Route</h3>
@@ -754,11 +756,11 @@
           </div>
           <div class="panel span-7">
             <h3>Current Planning Read</h3>
-            <p>Keep the plan selective: private Kyoto context, meaningful Hiroshima history, old Tokyo/gardens, whisky-forward Hokkaido, and a compact Seoul cultural walk. Skip the sumo lunch/show because it is too staged for the group taste.</p>
+            <p>Hotels are booked for Kyoto, Tokyo, Sapporo, Lake Toya, and Seoul. Hakodate remains the lodging gap. Keep touring selective: private Kyoto context, meaningful Hiroshima history, old Tokyo/gardens, whisky-forward Hokkaido, and a compact Seoul cultural walk.</p>
           </div>
           <div class="panel span-5">
             <h3>Next Best Move</h3>
-            <p>Ask Amex or hotel concierges for private-guide quotes, then use Viator as the benchmark. If concierge is polished and reasonable, use concierge. If vague or overpriced, book the cleanest public option.</p>
+            <p>Close Hakodate, then ask the booked hotel concierges for private-guide quotes. Use Viator as the benchmark; if concierge is polished and reasonable, use concierge.</p>
           </div>
         </div>
       `;
@@ -813,9 +815,9 @@
       document.getElementById("hotels").innerHTML = `
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Stop</th><th>Hotel</th><th>Positioning</th><th>Approx. Cost</th><th>Why It Fits</th></tr></thead>
+            <thead><tr><th>Status</th><th>Stop</th><th>Dates</th><th>Hotel</th><th>Room / Notes</th><th>Positioning</th><th>Approx. Cost</th><th>Why It Fits</th></tr></thead>
             <tbody>
-              ${rows.map(h => `<tr><td>${h.stop}</td><td><strong>${h.hotel}</strong></td><td>${h.position}</td><td>${h.range}</td><td>${h.fit}</td></tr>`).join("")}
+              ${rows.map(h => `<tr><td>${pill(h.status)}</td><td>${h.stop}</td><td>${h.dates}</td><td><strong>${h.hotel}</strong></td><td>${h.notes}</td><td>${h.position}</td><td>${h.range}</td><td>${h.fit}</td></tr>`).join("")}
             </tbody>
           </table>
         </div>
