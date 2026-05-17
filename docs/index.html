@@ -480,6 +480,32 @@
       color: var(--green);
     }
 
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .tour-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 6px 9px;
+      color: var(--blue);
+      background: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .tour-link:hover {
+      border-color: var(--blue);
+      background: #f3f8fb;
+    }
+
     .empty {
       padding: 20px;
       color: var(--muted);
@@ -625,16 +651,30 @@
     ];
 
     const tours = [
-      { id: "kyoto-walk", date: "Aug 21", place: "Kyoto", who: "Lewis-only", title: "Private Kyoto cultural walk", channel: "Amex hotel concierge or private guide; Viator backup", cost: "$250-$500 total, or Viator-style $50-$90 pp", priority: "Must-book", status: "Need quote", why: "Sets the tone and avoids random temple hopping. Ask for Higashiyama, Kiyomizu-dera, Gion, and one strong garden/temple route." },
-      { id: "tea", date: "Aug 21 or 23", place: "Kyoto", who: "Lewis-only", title: "Tea ceremony", channel: "Concierge first; Viator backup", cost: "$36 pp simple, about $98 pp with kimono", priority: "Must-book", status: "Researching", why: "Best as a standalone cultural moment, not buried inside a long tour." },
-      { id: "arashiyama", date: "Aug 23", place: "Kyoto / Arashiyama", who: "Lewis-only", title: "Bamboo forest plus rickshaw", channel: "Viator or direct Ebisuya-style local operator", cost: "$84-$136 pp", priority: "Must-book", status: "Researching", why: "Short, scenic, memorable, and directly on the wishlist." },
-      { id: "hiroshima", date: "Aug 22", place: "Hiroshima", who: "Lewis-only", title: "Private Peace Memorial Park context guide", channel: "Viator or private Hiroshima guide", cost: "$76-$85 pp plus train", priority: "Must-book", status: "Researching", why: "A guide adds real value for the history. Keep Miyajima optional unless energy is high." },
-      { id: "tokyo-old", date: "Aug 27", place: "Tokyo", who: "All four", title: "Old Tokyo and gardens private guide", channel: "Viator or concierge", cost: "$52-$86 pp, or concierge quote", priority: "Must-book", status: "Researching", why: "Best shared Tokyo guide block: Asakusa, Nezu/Yanaka, Koishikawa Korakuen or Hamarikyu." },
-      { id: "sumo", date: "Aug 28", place: "Tokyo", who: "All four", title: "Sumo lunch/show", channel: "Do not book", cost: "$106-$115 pp if reconsidered", priority: "Skip", status: "Skipped", why: "Too staged and touristy for the group taste. Replace with gardens, old Tokyo, refined lunch, cocktails, or omakase." },
-      { id: "otaru", date: "Aug 30", place: "Sapporo / Otaru / Yoichi", who: "All four", title: "Otaru plus Nikka Yoichi whisky day", channel: "Private car/guide or concierge-arranged logistics", cost: "From $558 per group private; group version about $160 pp", priority: "Must-book", status: "Researching", why: "Logistics matter here and whisky is the priority over beer." },
-      { id: "toya", date: "Sep 1", place: "Lake Toya", who: "All four", title: "Mt. Usu / Showa-Shinzan or lake nature logistics", channel: "Hotel concierge / local transfer", cost: "$200-$400 total planning budget", priority: "Maybe", status: "Hold", why: "Keep light. This is a wellness reset, not a heavy touring day." },
-      { id: "hakodate", date: "Sep 2", place: "Hakodate", who: "All four", title: "Motomachi, waterfront, Mt. Hakodate", channel: "Self-guided or hotel transfer", cost: "$0 guide; private guide about $269 pp if needed", priority: "Maybe", status: "Hold", why: "Hakodate is manageable and the ship may duplicate some sights." },
-      { id: "seoul", date: "Sep 16", place: "Seoul", who: "All four", title: "Palace, Bukchon, Insa-dong walk", channel: "Viator or hotel concierge", cost: "$65-$88 pp small group; private full day about $250 pp", priority: "Must-book", status: "Researching", why: "Best compact Seoul overview. Avoid a bloated all-day route." }
+      { id: "kyoto-walk", date: "Aug 21", place: "Kyoto", who: "Lewis-only", title: "Private Kyoto cultural walk", channel: "Amex hotel concierge or private guide; Viator backup", cost: "$250-$500 total, or Viator-style $50-$90 pp", priority: "Must-book", status: "Need quote", why: "Sets the tone and avoids random temple hopping. Ask for Higashiyama, Kiyomizu-dera, Gion, and one strong garden/temple route.", links: [{ label: "Viator Kyoto private guide", url: "https://www.viator.com/en-GB/tours/Kyoto/Kyoto-Full-day-Private-Custom-Tour-with-National-Licensed-Guide/d332-92136P55" }, { label: "Amex Four Seasons Kyoto", url: "https://www.americanexpress.com/en-us/travel/discover/property/Four-Seasons-Hotel-Kyoto" }] },
+      { id: "kyoto-higashiyama", date: "Aug 21", place: "Kyoto", who: "Lewis-only", title: "Gion, Kiyomizu-dera and Higashiyama half-day walk", channel: "Viator if you want a defined half-day product", cost: "Check live pricing", priority: "Must-book", status: "Shortlist", why: "A cleaner fit than a full-day Kyoto circuit if you want the guide focused on the most atmospheric east-side neighborhoods.", links: [{ label: "Viator half-day walk", url: "https://www.viator.com/en-SG/tours/Kyoto/Kiyomizu-Temple-and-Backstreets-of-Gion-Half-Day-Private-Tour/d332-21490P133" }] },
+      { id: "tea", date: "Aug 21 or 23", place: "Kyoto", who: "Lewis-only", title: "Tea ceremony with optional kimono and calligraphy", channel: "Concierge first; Viator backup", cost: "$36 pp simple, about $98 pp with kimono", priority: "Must-book", status: "Researching", why: "Best as a standalone cultural moment, not buried inside a long tour.", links: [{ label: "Viator tea and calligraphy", url: "https://www.viator.com/en-PH/tours/Kyoto/Kimono-Tea-Ceremony-Experience-at-Kyoto-Oritsuruya-NISHIKI/d332-293458P17" }, { label: "Amex Four Seasons Kyoto", url: "https://www.americanexpress.com/en-us/travel/discover/property/Four-Seasons-Hotel-Kyoto" }] },
+      { id: "kyoto-calligraphy", date: "Aug 21 or 23", place: "Kyoto", who: "Lewis-only", title: "Kyoto townhouse calligraphy workshop", channel: "Viator direct booking", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "Good short add-on if the tea ceremony does not include calligraphy or if you want one quiet hands-on hour.", links: [{ label: "Viator calligraphy", url: "https://www.viator.com/en-GB/tours/Kyoto/Calligraphy-Experience-in-Kyoto-Townhouse/d332-53448P3" }] },
+      { id: "arashiyama", date: "Aug 23", place: "Kyoto / Arashiyama", who: "Lewis-only", title: "Bamboo forest plus rickshaw", channel: "Viator or direct Ebisuya-style local operator", cost: "$84-$136 pp", priority: "Must-book", status: "Researching", why: "Short, scenic, memorable, and directly on the wishlist.", links: [{ label: "Viator rickshaw tour", url: "https://www.viator.com/en-GB/tours/Kyoto/Kyoto-Arashiyama-Rickshaw-Tour-with-Bamboo-Forest/d332-6808P17" }] },
+      { id: "arashiyama-walk", date: "Aug 23", place: "Kyoto / Arashiyama", who: "Lewis-only", title: "Arashiyama beyond the bamboo walking tour", channel: "Viator backup if rickshaw timing is awkward", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "A more rounded Arashiyama option with temples and gardens if you want substance beyond the photo stop.", links: [{ label: "Viator Arashiyama walk", url: "https://www.viator.com/tours/Kyoto/Kyoto-Explore-Arashiyama-Walking-Tour/d332-157741P11" }] },
+      { id: "hiroshima", date: "Aug 22", place: "Hiroshima", who: "Lewis-only", title: "Private Peace Memorial Park context guide", channel: "Viator or private Hiroshima guide", cost: "$76-$85 pp plus train", priority: "Must-book", status: "Researching", why: "A guide adds real value for the history. Keep Miyajima optional unless energy is high.", links: [{ label: "Viator Hiroshima private guide", url: "https://www.viator.com/en-GB/tours/Hiroshima/Hiroshima-Full-day-Private-Custom-Tour-with-National-Licensed-Guide/d4661-92136P41" }] },
+      { id: "hiroshima-miyajima", date: "Aug 22", place: "Hiroshima / Miyajima", who: "Lewis-only", title: "Miyajima and Peace Memorial private day", channel: "Viator only if you choose a longer Hiroshima day", cost: "Check live pricing", priority: "Maybe", status: "Hold", why: "Worth keeping as the long-day version, but it should not become the default if the goal is a measured historical visit.", links: [{ label: "Viator Miyajima + Peace Park", url: "https://www.viator.com/en-GB/tours/Hiroshima/One-Day-Miyajima-Peace-Memorial-Park-and-Hiroshima-Castle-Tour/d4661-117276P1" }] },
+      { id: "tokyo-old", date: "Aug 27", place: "Tokyo", who: "All four", title: "Old Tokyo and gardens private guide", channel: "Viator or concierge", cost: "$52-$86 pp, or concierge quote", priority: "Must-book", status: "Researching", why: "Best shared Tokyo guide block: Asakusa, Nezu/Yanaka, Koishikawa Korakuen or Hamarikyu.", links: [{ label: "Viator Asakusa + Yanaka", url: "https://www.viator.com/en-CA/tours/Tokyo/Yanaka-Walking-Tour/d334-22288P29" }, { label: "Amex hotel finder", url: "https://www.americanexpress.com/en-us/travel/discover/hotel-finder" }] },
+      { id: "tokyo-yanaka", date: "Aug 27", place: "Tokyo", who: "All four", title: "Yanaka, Nezu and old-town Tokyo walk", channel: "Viator small-group backup", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "A gentler neighborhood walk with old Tokyo texture if the private guide quotes get fuzzy.", links: [{ label: "Viator Yanaka walk", url: "https://www.viator.com/en-GB/tours/Tokyo/Yanaka-Historical-Walking-Tour/d334-63670P18" }] },
+      { id: "tokyo-gardens", date: "Aug 27 or 28", place: "Tokyo", who: "All four", title: "Tokyo Japanese gardens private tour", channel: "Viator or specialist garden guide", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "A strong replacement for anything too touristy: Koishikawa Korakuen, Hamarikyu, Rikugien, or Kiyosumi-style garden time.", links: [{ label: "Viator garden tour", url: "https://www.viator.com/es-MX/tours/Tokyo/Tokyo-Best-Japanese-Gardens-Private-Custom-Tour-with-National-Licensed-Guide/d334-92136P76" }] },
+      { id: "tokyo-food", date: "Aug 28", place: "Tokyo", who: "All four", title: "Private Tokyo food and drink evening", channel: "Viator if you want a hosted local night", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "A better fit than the skipped sumo show if the group wants a social shared Tokyo night with less staging.", links: [{ label: "Viator private food tour", url: "https://www.viator.com/tours/Tokyo/Eat-and-Drink-like-a-Local-in-Tokyo/d334-30791P173" }, { label: "Viator bar-hopping master", url: "https://www.viator.com/en-IN/tours/Tokyo/Tokyo-Local-Food-and-Drink-Experience-with-a-Bar-Hopping-Master/d334-13441P6" }] },
+      { id: "sumo", date: "Aug 28", place: "Tokyo", who: "All four", title: "Sumo lunch/show", channel: "Do not book unless the group reverses course", cost: "$106-$115 pp if reconsidered", priority: "Skip", status: "Skipped", why: "Too staged and touristy for the group taste. Replace with gardens, old Tokyo, refined lunch, cocktails, or omakase.", links: [{ label: "Viator sumo option", url: "https://www.viator.com/tours/Tokyo/Challenge-Sumo-Wrestlers-and-Enjoy-a-Chanko-Lunch/d334-13441P51" }] },
+      { id: "otaru", date: "Aug 30", place: "Sapporo / Otaru / Yoichi", who: "All four", title: "Otaru plus Nikka Yoichi whisky day", channel: "Private car/guide or concierge-arranged logistics", cost: "From about $470 per group private; group versions vary", priority: "Must-book", status: "Researching", why: "Logistics matter here and whisky is the priority over beer.", links: [{ label: "Viator Otaru + Yoichi", url: "https://www.viator.com/tours/Sapporo/6-Hour-Private-Package-Otaru-and-Nikka-Yoichi-Whisky-Distillery-from-Sapporo/d5559-17229P185" }] },
+      { id: "otaru-licensed", date: "Aug 30", place: "Sapporo / Otaru / Yoichi", who: "All four", title: "Otaru and Yoichi licensed guide with vehicle", channel: "Viator premium private backup", cost: "Higher private-group pricing", priority: "Maybe", status: "Shortlist", why: "Useful if you want a more guide-led version rather than just private transportation.", links: [{ label: "Viator licensed Otaru + Yoichi", url: "https://www.viator.com/Sapporo-tours/Sake-Brewery-Tour/d5559-tag21572" }] },
+      { id: "sapporo-food", date: "Aug 29 or 30", place: "Sapporo", who: "All four", title: "Sapporo market or bar-hopping food tour", channel: "Viator optional food add-on", cost: "$100-ish pp for group tours; private varies", priority: "Maybe", status: "Hold", why: "Good if the arrival evening needs structure, but whisky and seafood should stay the center of gravity.", links: [{ label: "Viator Sapporo bar hopping", url: "https://www.viator.com/Sapporo-tours/Food-Tours/d5559-g6-c80" }, { label: "Viator market cooking", url: "https://www.viator.com/tours/Sapporo/Private-Market-Tour-Cooking-Class-and-Lunch-with-a-Local-in-Sapporo/d5559-7626P378" }] },
+      { id: "toya", date: "Sep 1", place: "Lake Toya", who: "All four", title: "Mt. Usu / Showa-Shinzan or lake nature logistics", channel: "Hotel concierge / local transfer", cost: "$200-$400 total planning budget", priority: "Maybe", status: "Hold", why: "Keep light. This is a wellness reset, not a heavy touring day.", links: [{ label: "Viator Lake Toya ideas", url: "https://www.viator.com/Hokkaido-attractions/Lake-Toya-Toyako/d5558-a113575" }, { label: "All Hokkaido Mt. Usu walk", url: "https://allhokkaido.com/programs/5476/" }] },
+      { id: "toya-noboribetsu", date: "Sep 1", place: "Lake Toya / Noboribetsu", who: "All four", title: "Lake Toya, Mt. Usu and Noboribetsu private day", channel: "Viator only if the group wants a bigger nature day", cost: "Check live pricing", priority: "Maybe", status: "Hold", why: "The more ambitious version of Lake Toya day; keep it optional so the onsen reset survives.", links: [{ label: "Viator Toya + Noboribetsu", url: "https://www.viator.com/en-GB/tours/Sapporo/Noboribetsu-Hell-Valley-and-Lake-Toya-1-Day-Trip/d5559-73003P5" }] },
+      { id: "hakodate", date: "Sep 2", place: "Hakodate", who: "All four", title: "Motomachi, waterfront, Mt. Hakodate", channel: "Self-guided or hotel transfer", cost: "$0 guide; private guide available if needed", priority: "Maybe", status: "Hold", why: "Hakodate is manageable and the ship may duplicate some sights.", links: [{ label: "Viator Hakodate private guide", url: "https://www.viator.com/en-CA/tours/Hakodate/Hakodate-Full-Day-Private-Tour-with-Nationally-Licensed-Guide/d4697-92136P115" }] },
+      { id: "hakodate-shore", date: "Sep 2 or 3", place: "Hakodate", who: "All four", title: "Hakodate private van shore-style tour", channel: "Viator backup if luggage/port logistics matter", cost: "Check live pricing", priority: "Maybe", status: "Hold", why: "Good logistical backup for Goryokaku, Motomachi, waterfront, and Mt. Hakodate without piecing taxis together.", links: [{ label: "Viator Hakodate in a day", url: "https://www.viator.com/Hakodate-tours/Full-day-Tours/d4697-g12-c94" }] },
+      { id: "seoul", date: "Sep 16", place: "Seoul", who: "All four", title: "Palace, Bukchon, Insa-dong walk", channel: "Viator or Four Seasons concierge", cost: "$65-$88 pp small group; private full day about $250 pp", priority: "Must-book", status: "Researching", why: "Best compact Seoul overview. Avoid a bloated all-day route.", links: [{ label: "Viator palace walk", url: "https://www.viator.com/en-SG/tours/Seoul/Gyeongbokgung-Palace-and-Bukchon-Hanok-Village-Small-Group-Walking-Tour/d973-8115P2" }, { label: "Amex Four Seasons Seoul", url: "https://www.americanexpress.com/en-us/travel/fine-hotels-resorts/property/Four-Seasons-Hotel-Seoul" }] },
+      { id: "seoul-private", date: "Sep 16", place: "Seoul", who: "All four", title: "Custom private Seoul highlights", channel: "Viator if you want hotel pickup and customization", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "Keep as the private version if the group wants door-to-door ease or a hanbok/photo element.", links: [{ label: "Viator private Seoul highlights", url: "https://www.viator.com/en-HK/tours/Seoul/Full-day-Customizable-Private-Seoul-Highlight-Tour-with-Hanbok-Experience/d973-42053P19" }] },
+      { id: "seoul-dmz", date: "Sep 16", place: "Seoul / DMZ", who: "All four", title: "Private DMZ tour", channel: "Viator only if the group chooses history over city time", cost: "Check live pricing", priority: "Maybe", status: "Hold", why: "Historically interesting, but usually early and long. Treat as a deliberate tradeoff against the compact Seoul cultural day.", links: [{ label: "Viator private DMZ", url: "https://www.viator.com/tours/Seoul/Korea-DMZ-Tour/d973-6780P36" }] },
+      { id: "amex-viator-benefit", date: "Any date", place: "Japan / Korea", who: "All four", title: "Amex Viator benefit page", channel: "Use before booking eligible Viator tours", cost: "Potential Amex eligible-card discount; verify terms", priority: "Maybe", status: "Researching", why: "A useful booking-path reminder if paying with Amex. Check eligibility and promo terms before relying on it.", links: [{ label: "Amex Viator benefit", url: "https://experiences.global/us/travel/viator" }] }
     ];
 
     const hotels = [
@@ -704,6 +744,11 @@
     function pill(text) {
       const cls = text === "Must-book" ? "green" : text === "Skip" ? "red" : text === "Maybe" ? "gold" : text === "All four" ? "plum" : text === "Lewis-only" ? "blue" : "muted";
       return `<span class="pill ${cls}">${text}</span>`;
+    }
+
+    function renderLinks(links = []) {
+      if (!links.length) return "";
+      return `<div class="link-row">${links.map(link => `<a class="tour-link" href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`).join("")}</div>`;
     }
 
     function renderNav() {
@@ -787,6 +832,7 @@
               <div class="body-text"><strong>${t.date}</strong> - ${t.why}</div>
               <div class="body-text"><strong>Channel:</strong> ${t.channel}</div>
               <div class="cost">${t.cost}</div>
+              ${renderLinks(t.links)}
               <div class="status-row">
                 <span class="body-text">Status</span>
                 <select class="select" data-status="${t.id}">
