@@ -320,6 +320,54 @@
     .pill.plum { background: var(--plum); }
     .pill.muted { background: #6b7280; }
 
+    .icon-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-items: center;
+    }
+
+    .guide-icon {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: inline-grid;
+      place-items: center;
+      color: #17211f;
+      background: #f7f7f1;
+    }
+
+    .guide-icon svg {
+      width: 19px;
+      height: 19px;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .guide-icon.train { color: var(--blue); background: #eef5f9; }
+    .guide-icon.flight { color: var(--plum); background: #f5f0f6; }
+    .guide-icon.place { color: var(--red); background: #fbf1ef; }
+    .guide-icon.garden { color: var(--green); background: #eef7f1; }
+    .guide-icon.dining { color: var(--gold); background: #fbf6e9; }
+    .guide-icon.hike { color: #4f6f3a; background: #f1f6eb; }
+    .guide-icon.hotel { color: #5b6670; background: #f4f5f0; }
+    .guide-icon.ship { color: #2c6f8a; background: #eef7fa; }
+    .guide-icon.whisky { color: #8c5b2a; background: #faf1e8; }
+    .guide-icon.culture { color: #7b496d; background: #f7edf4; }
+
+    .day-head {
+      display: flex;
+      gap: 10px;
+      align-items: start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
     .body-text {
       color: var(--muted);
       line-height: 1.48;
@@ -565,6 +613,54 @@
 </head>
 <body>
   <div class="app">
+    <svg aria-hidden="true" width="0" height="0" style="position:absolute">
+      <symbol id="icon-train" viewBox="0 0 24 24">
+        <rect x="5" y="3" width="14" height="15" rx="3"></rect>
+        <path d="M8 7h8M8 11h8M8 21l3-3M16 21l-3-3"></path>
+        <circle cx="9" cy="15" r="1"></circle>
+        <circle cx="15" cy="15" r="1"></circle>
+      </symbol>
+      <symbol id="icon-flight" viewBox="0 0 24 24">
+        <path d="M2 16l20-9-9 20-2-8-9-3z"></path>
+        <path d="M11 19l3-7"></path>
+      </symbol>
+      <symbol id="icon-place" viewBox="0 0 24 24">
+        <path d="M12 21s7-5.2 7-11a7 7 0 0 0-14 0c0 5.8 7 11 7 11z"></path>
+        <circle cx="12" cy="10" r="2.5"></circle>
+      </symbol>
+      <symbol id="icon-garden" viewBox="0 0 24 24">
+        <path d="M12 20V9"></path>
+        <path d="M12 11C8 11 6 8.5 6 5c4 0 6 2.5 6 6z"></path>
+        <path d="M12 14c4 0 6-2.5 6-6-4 0-6 2.5-6 6z"></path>
+        <path d="M5 20h14"></path>
+      </symbol>
+      <symbol id="icon-dining" viewBox="0 0 24 24">
+        <path d="M7 3v8M4 3v5c0 2 1.3 3 3 3s3-1 3-3V3M7 11v10"></path>
+        <path d="M16 3v18M16 3c3 2 4 5 4 8h-4"></path>
+      </symbol>
+      <symbol id="icon-hike" viewBox="0 0 24 24">
+        <path d="M3 20l5-8 4 6 3-4 6 6H3z"></path>
+        <path d="M15 6l2-3 2 3M17 3v8"></path>
+      </symbol>
+      <symbol id="icon-hotel" viewBox="0 0 24 24">
+        <path d="M4 20V4h10v16M14 10h6v10M2 20h20"></path>
+        <path d="M7 8h2M7 12h2M7 16h2"></path>
+      </symbol>
+      <symbol id="icon-ship" viewBox="0 0 24 24">
+        <path d="M4 15l2-6h12l2 6"></path>
+        <path d="M7 9V5h7v4"></path>
+        <path d="M3 16c2 3 4 3 6 1 2 2 4 2 6 0 2 2 4 2 6-1"></path>
+        <path d="M5 20c2 1 4 1 6 0 2 1 4 1 6 0"></path>
+      </symbol>
+      <symbol id="icon-whisky" viewBox="0 0 24 24">
+        <path d="M7 3h10l-2 18H9L7 3z"></path>
+        <path d="M8 9h8M9 16h6"></path>
+      </symbol>
+      <symbol id="icon-culture" viewBox="0 0 24 24">
+        <path d="M4 10h16M6 10v8M18 10v8M3 20h18"></path>
+        <path d="M12 4l7 6H5l7-6z"></path>
+      </symbol>
+    </svg>
     <aside>
       <div class="brand">
         <h1>Japan & South Korea 2026</h1>
@@ -572,7 +668,7 @@
       </div>
       <nav id="nav"></nav>
       <div class="side-note">
-        <strong>Planning rule:</strong> no early starts, usually 2-4 hour guide blocks, and no staged sumo lunch/show unless the group asks for it.
+        <strong>Planning rule:</strong> no early starts, usually 2-4 hour guide blocks, and only keep options the group is actively considering.
       </div>
     </aside>
 
@@ -589,7 +685,7 @@
           <button data-filter="Lewis-only">Lewis-only</button>
           <button data-filter="All four">All four</button>
           <button data-filter="Must-book">Must-book</button>
-          <button data-filter="Skip">Skip</button>
+          <button data-filter="Maybe">Maybe</button>
         </div>
       </div>
 
@@ -637,7 +733,7 @@
       { date: "Aug 25", base: "Tokyo", who: "Lewis-only", travel: "Local Tokyo touring", agenda: "Brad/Evan favorites: Shibuya Crossing/Sky, Daikanyama Tsutaya, Ebisu, casual favorite dinner." },
       { date: "Aug 26", base: "Tokyo", who: "All four", travel: "Goldblatts arrive Tokyo", agenda: "Lewis morning flexible. Easy shared welcome dinner." },
       { date: "Aug 27", base: "Tokyo", who: "All four", travel: "Local Tokyo touring", agenda: "Old Tokyo/gardens private guide: Asakusa, Nezu/Yanaka, Koishikawa Korakuen or Hamarikyu." },
-      { date: "Aug 28", base: "Tokyo", who: "All four", travel: "Local Tokyo touring", agenda: "Skip sumo lunch/show. Use the day for gardens, old Tokyo, refined lunch, omakase, or cocktail anchor." },
+      { date: "Aug 28", base: "Tokyo", who: "All four", travel: "Local Tokyo touring", agenda: "Use the day for gardens, old Tokyo, refined lunch, omakase, or a cocktail anchor." },
       { date: "Aug 29", base: "Sapporo", who: "All four", travel: "Fly Tokyo to New Chitose; transfer to Sapporo", agenda: "Arrive Sapporo. Seafood, ramen, easy city walk, optional beer if convenient." },
       { date: "Aug 30", base: "Sapporo / Otaru / Yoichi", who: "All four", travel: "Train or driver for Otaru and Yoichi", agenda: "Whisky-forward day: Nikka Yoichi, Otaru canal, seafood, optional Sapporo evening." },
       { date: "Aug 31", base: "Lake Toya", who: "All four", travel: "Train Sapporo to Toya Station; local transfer to lake", agenda: "Check in for lake wellness/onsen stay. Relaxed hotel dinner." },
@@ -662,8 +758,7 @@
       { id: "tokyo-old", date: "Aug 27", place: "Tokyo", who: "All four", title: "Old Tokyo and gardens private guide", channel: "Viator or concierge", cost: "$52-$86 pp, or concierge quote", priority: "Must-book", status: "Researching", why: "Best shared Tokyo guide block: Asakusa, Nezu/Yanaka, Koishikawa Korakuen or Hamarikyu.", links: [{ label: "Viator Asakusa + Yanaka", url: "https://www.viator.com/en-CA/tours/Tokyo/Yanaka-Walking-Tour/d334-22288P29" }, { label: "Amex hotel finder", url: "https://www.americanexpress.com/en-us/travel/discover/hotel-finder" }] },
       { id: "tokyo-yanaka", date: "Aug 27", place: "Tokyo", who: "All four", title: "Yanaka, Nezu and old-town Tokyo walk", channel: "Viator small-group backup", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "A gentler neighborhood walk with old Tokyo texture if the private guide quotes get fuzzy.", links: [{ label: "Viator Yanaka walk", url: "https://www.viator.com/en-GB/tours/Tokyo/Yanaka-Historical-Walking-Tour/d334-63670P18" }] },
       { id: "tokyo-gardens", date: "Aug 27 or 28", place: "Tokyo", who: "All four", title: "Tokyo Japanese gardens private tour", channel: "Viator or specialist garden guide", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "A strong replacement for anything too touristy: Koishikawa Korakuen, Hamarikyu, Rikugien, or Kiyosumi-style garden time.", links: [{ label: "Viator garden tour", url: "https://www.viator.com/es-MX/tours/Tokyo/Tokyo-Best-Japanese-Gardens-Private-Custom-Tour-with-National-Licensed-Guide/d334-92136P76" }] },
-      { id: "tokyo-food", date: "Aug 28", place: "Tokyo", who: "All four", title: "Private Tokyo food and drink evening", channel: "Viator if you want a hosted local night", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "A better fit than the skipped sumo show if the group wants a social shared Tokyo night with less staging.", links: [{ label: "Viator private food tour", url: "https://www.viator.com/tours/Tokyo/Eat-and-Drink-like-a-Local-in-Tokyo/d334-30791P173" }, { label: "Viator bar-hopping master", url: "https://www.viator.com/en-IN/tours/Tokyo/Tokyo-Local-Food-and-Drink-Experience-with-a-Bar-Hopping-Master/d334-13441P6" }] },
-      { id: "sumo", date: "Aug 28", place: "Tokyo", who: "All four", title: "Sumo lunch/show", channel: "Do not book unless the group reverses course", cost: "$106-$115 pp if reconsidered", priority: "Skip", status: "Skipped", why: "Too staged and touristy for the group taste. Replace with gardens, old Tokyo, refined lunch, cocktails, or omakase.", links: [{ label: "Viator sumo option", url: "https://www.viator.com/tours/Tokyo/Challenge-Sumo-Wrestlers-and-Enjoy-a-Chanko-Lunch/d334-13441P51" }] },
+      { id: "tokyo-food", date: "Aug 28", place: "Tokyo", who: "All four", title: "Private Tokyo food and drink evening", channel: "Viator if you want a hosted local night", cost: "Check live pricing", priority: "Maybe", status: "Shortlist", why: "A good fit if the group wants a social shared Tokyo night with neighborhood texture and less staging.", links: [{ label: "Viator private food tour", url: "https://www.viator.com/tours/Tokyo/Eat-and-Drink-like-a-Local-in-Tokyo/d334-30791P173" }, { label: "Viator bar-hopping master", url: "https://www.viator.com/en-IN/tours/Tokyo/Tokyo-Local-Food-and-Drink-Experience-with-a-Bar-Hopping-Master/d334-13441P6" }] },
       { id: "otaru", date: "Aug 30", place: "Sapporo / Otaru / Yoichi", who: "All four", title: "Otaru plus Nikka Yoichi whisky day", channel: "Private car/guide or concierge-arranged logistics", cost: "From about $470 per group private; group versions vary", priority: "Must-book", status: "Researching", why: "Logistics matter here and whisky is the priority over beer.", links: [{ label: "Viator Otaru + Yoichi", url: "https://www.viator.com/tours/Sapporo/6-Hour-Private-Package-Otaru-and-Nikka-Yoichi-Whisky-Distillery-from-Sapporo/d5559-17229P185" }] },
       { id: "otaru-licensed", date: "Aug 30", place: "Sapporo / Otaru / Yoichi", who: "All four", title: "Otaru and Yoichi licensed guide with vehicle", channel: "Viator premium private backup", cost: "Higher private-group pricing", priority: "Maybe", status: "Shortlist", why: "Useful if you want a more guide-led version rather than just private transportation.", links: [{ label: "Viator licensed Otaru + Yoichi", url: "https://www.viator.com/Sapporo-tours/Sake-Brewery-Tour/d5559-tag21572" }] },
       { id: "sapporo-food", date: "Aug 29 or 30", place: "Sapporo", who: "All four", title: "Sapporo market or bar-hopping food tour", channel: "Viator optional food add-on", cost: "$100-ish pp for group tours; private varies", priority: "Maybe", status: "Hold", why: "Good if the arrival evening needs structure, but whisky and seafood should stay the center of gravity.", links: [{ label: "Viator Sapporo bar hopping", url: "https://www.viator.com/Sapporo-tours/Food-Tours/d5559-g6-c80" }, { label: "Viator market cooking", url: "https://www.viator.com/tours/Sapporo/Private-Market-Tour-Cooking-Class-and-Lunch-with-a-Local-in-Sapporo/d5559-7626P378" }] },
@@ -693,8 +788,7 @@
       { id: "hakodate-hotel", title: "Hakodate hotel", detail: "Still open for Sep 2-3. Choose the pre-cruise hotel." },
       { id: "hiroshima-scope", title: "Hiroshima scope", detail: "Default to Hiroshima-focused. Miyajima only if energy and timing support a longer day." },
       { id: "tour-booking", title: "Tours to book", detail: "Lock private Kyoto, Hiroshima guide, Tokyo old-town/gardens, Otaru/Yoichi, and Seoul." },
-      { id: "dining-anchors", title: "Dining anchors", detail: "Pick two or three serious dining/bar experiences across Kyoto, Tokyo, Sapporo, and Seoul." },
-      { id: "sumo-skip", title: "Sumo lunch/show", detail: "Currently skipped because it feels too staged and touristy for the group." }
+      { id: "dining-anchors", title: "Dining anchors", detail: "Pick two or three serious dining/bar experiences across Kyoto, Tokyo, Sapporo, and Seoul." }
     ];
 
     const dining = [
@@ -742,8 +836,28 @@
     }
 
     function pill(text) {
-      const cls = text === "Must-book" ? "green" : text === "Skip" ? "red" : text === "Maybe" ? "gold" : text === "All four" ? "plum" : text === "Lewis-only" ? "blue" : "muted";
+      const cls = text === "Must-book" ? "green" : text === "Maybe" ? "gold" : text === "All four" ? "plum" : text === "Lewis-only" ? "blue" : "muted";
       return `<span class="pill ${cls}">${text}</span>`;
+    }
+
+    function icon(name, label) {
+      return `<span class="guide-icon ${name}" title="${label}" aria-label="${label}"><svg><use href="#icon-${name}"></use></svg></span>`;
+    }
+
+    function itineraryIcons(day) {
+      const hay = `${day.base} ${day.travel} ${day.agenda}`.toLowerCase();
+      const tags = [];
+      if (hay.includes("fly") || hay.includes("plane") || hay.includes("incheon") || hay.includes("sfo")) tags.push(["flight", "Flight"]);
+      if (hay.includes("train")) tags.push(["train", "Train"]);
+      if (hay.includes("check in") || hay.includes("hotel") || hay.includes("onsen")) tags.push(["hotel", "Hotel"]);
+      if (hay.includes("cruise") || hay.includes("ship") || hay.includes("port") || hay.includes("board the world")) tags.push(["ship", "Ship"]);
+      if (hay.includes("garden") || hay.includes("bamboo") || hay.includes("lake") || hay.includes("temple")) tags.push(["garden", "Gardens"]);
+      if (hay.includes("hiking") || hay.includes("walks") || hay.includes("nature") || hay.includes("mt.")) tags.push(["hike", "Nature"]);
+      if (hay.includes("dinner") || hay.includes("lunch") || hay.includes("seafood") || hay.includes("ramen") || hay.includes("omakase") || hay.includes("cocktail") || hay.includes("cafe")) tags.push(["dining", "Dining"]);
+      if (hay.includes("tea") || hay.includes("gion") || hay.includes("palace") || hay.includes("bukchon") || hay.includes("memorial") || hay.includes("whisky") || hay.includes("nikk")) tags.push(["culture", "Culture"]);
+      if (hay.includes("whisky") || hay.includes("yoichi")) tags.push(["whisky", "Whisky"]);
+      if (!tags.length) tags.push(["place", "Place"]);
+      return tags.slice(0, 4).map(([name, label]) => icon(name, label)).join("");
     }
 
     function renderLinks(links = []) {
@@ -770,7 +884,7 @@
 
     function renderOverview() {
       const mustBook = tours.filter(t => t.priority === "Must-book").length;
-      const skipped = tours.filter(t => t.priority === "Skip").length;
+      const maybeTours = tours.filter(t => t.priority === "Maybe").length;
       const bookedHotels = hotels.filter(h => h.status === "Booked").length;
       const openDecisions = decisions.filter(d => getDecision(d.id) !== "Decided").length;
       document.getElementById("overview").innerHTML = `
@@ -778,7 +892,7 @@
           <div class="panel span-3 metric"><strong>29</strong><span>calendar days including flights and cruise</span></div>
           <div class="panel span-3 metric"><strong>${mustBook}</strong><span>recommended tour blocks</span></div>
           <div class="panel span-3 metric"><strong>${bookedHotels}</strong><span>booked hotel stays</span></div>
-          <div class="panel span-3 metric"><strong>${skipped}</strong><span>experience intentionally skipped</span></div>
+          <div class="panel span-3 metric"><strong>${maybeTours}</strong><span>optional tour ideas</span></div>
           <div class="panel span-12">
             <h3>Route</h3>
             <div class="map-strip">
@@ -812,7 +926,10 @@
               <div class="day-date">${d.date}<small>${d.who}</small></div>
               <div>
                 <div class="meta">${pill(d.base)} ${pill(d.who)}</div>
-                <h3>${d.travel}</h3>
+                <div class="day-head">
+                  <h3>${d.travel}</h3>
+                  <div class="icon-tags">${itineraryIcons(d)}</div>
+                </div>
                 <p>${d.agenda}</p>
               </div>
             </article>
@@ -836,7 +953,7 @@
               <div class="status-row">
                 <span class="body-text">Status</span>
                 <select class="select" data-status="${t.id}">
-                  ${["Researching","Need quote","Hold","Shortlist","Booked","Skipped"].map(s => `<option ${getStatus(t.id, t.status) === s ? "selected" : ""}>${s}</option>`).join("")}
+                  ${["Researching","Need quote","Hold","Shortlist","Booked"].map(s => `<option ${getStatus(t.id, t.status) === s ? "selected" : ""}>${s}</option>`).join("")}
                 </select>
               </div>
             </article>
