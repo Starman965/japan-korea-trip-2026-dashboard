@@ -1,0 +1,8 @@
+.DS_Store
+*.pdf
+*.pages
+
+# Keep planning source files local unless intentionally added.
+*.docx
+*.xlsx
+

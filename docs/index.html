@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Japan & South Korea 2026 Trip Dashboard</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1b1f23;
+      --muted: #5b6670;
+      --line: #d9dee5;
+      --soft: #f6f7f2;
+      --paper: #ffffff;
+      --green: #2f6f61;
+      --red: #a4483f;
+      --gold: #a8782a;
+      --blue: #2c5d8a;
+      --plum: #6e4d6f;
+      --shadow: 0 12px 30px rgba(27, 31, 35, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #eef1ed;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 22px;
+      background: #17211f;
+      color: #f6f7f2;
+      overflow: auto;
+    }
+
+    .brand {
+      display: grid;
+      gap: 8px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      color: rgba(246,247,242,0.72);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    nav {
+      display: grid;
+      gap: 6px;
+      margin: 20px 0;
+    }
+
+    .nav-btn {
+      border: 1px solid transparent;
+      background: transparent;
+      color: rgba(246,247,242,0.74);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: left;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .nav-btn.active {
+      color: #ffffff;
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .nav-icon {
+      width: 20px;
+      text-align: center;
+      color: #d9c99f;
+      flex: 0 0 20px;
+    }
+
+    .side-note {
+      border-top: 1px solid rgba(255,255,255,0.16);
+      padding-top: 18px;
+      color: rgba(246,247,242,0.72);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    main {
+      padding: 26px;
+      min-width: 0;
+    }
+
+    .hero {
+      min-height: 270px;
+      background:
+        linear-gradient(90deg, rgba(23,33,31,0.78), rgba(23,33,31,0.24)),
+        url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      display: grid;
+      align-content: end;
+      padding: 28px;
+      margin: -26px -26px 22px;
+    }
+
+    .hero h2 {
+      max-width: 840px;
+      margin: 0 0 10px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .search {
+      min-width: min(440px, 100%);
+      flex: 1;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px 12px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .segmented {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .segmented button {
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      padding: 8px 10px;
+      color: var(--muted);
+    }
+
+    .segmented button.active {
+      background: #17211f;
+      color: #fff;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: 1 / -1; }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .metric {
+      display: grid;
+      gap: 6px;
+    }
+
+    .metric strong {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .map-strip {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(92px, 1fr));
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .stop {
+      min-height: 92px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      padding: 10px;
+      display: grid;
+      align-content: space-between;
+      gap: 8px;
+    }
+
+    .stop strong {
+      font-size: 14px;
+    }
+
+    .stop small {
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .pill.gold { background: var(--gold); }
+    .pill.green { background: var(--green); }
+    .pill.red { background: var(--red); }
+    .pill.plum { background: var(--plum); }
+    .pill.muted { background: #6b7280; }
+
+    .body-text {
+      color: var(--muted);
+      line-height: 1.48;
+      font-size: 14px;
+    }
+
+    .status-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .select {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px 9px;
+      background: #fff;
+      max-width: 170px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 820px;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f4f5f0;
+      color: #31383f;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .note-box {
+      width: 100%;
+      min-height: 160px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      resize: vertical;
+      background: #fff;
+      color: var(--ink);
+      line-height: 1.45;
+    }
+
+    .mini-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .action {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: var(--ink);
+    }
+
+    .action.primary {
+      border-color: #17211f;
+      background: #17211f;
+      color: #fff;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .day {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .day-date {
+      display: grid;
+      align-content: start;
+      gap: 4px;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .day-date small {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .day h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+
+    .day p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .decision-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .decision {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .decision strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .decision span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .cost {
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .empty {
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+      background: #fff;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+    }
+
+    @media (max-width: 980px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: relative;
+        height: auto;
+      }
+
+      nav {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 {
+        grid-column: 1 / -1;
+      }
+
+      .hero {
+        min-height: 230px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      main {
+        padding: 16px;
+      }
+
+      .hero {
+        margin: -16px -16px 16px;
+        padding: 20px;
+      }
+
+      nav {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .day, .decision {
+        grid-template-columns: 1fr;
+      }
+
+      .segmented {
+        width: 100%;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <h1>Japan & South Korea 2026</h1>
+        <p>Working dashboard for David, Tiffanie, Brad, and Rachel. Built from the v9 review packet.</p>
+      </div>
+      <nav id="nav"></nav>
+      <div class="side-note">
+        <strong>Planning rule:</strong> no early starts, usually 2-4 hour guide blocks, and no staged sumo lunch/show unless the group asks for it.
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero">
+        <h2>Trip Control Room</h2>
+        <p>Itinerary, hotels, tours, decisions, and notes in one editable place. Use the status menus to keep decisions moving without rewriting a PDF.</p>
+      </section>
+
+      <div class="toolbar">
+        <input id="search" class="search" type="search" placeholder="Search itinerary, tours, hotels, notes...">
+        <div class="segmented" id="quickFilters">
+          <button class="active" data-filter="all">All</button>
+          <button data-filter="Lewis-only">Lewis-only</button>
+          <button data-filter="All four">All four</button>
+          <button data-filter="Must-book">Must-book</button>
+          <button data-filter="Skip">Skip</button>
+        </div>
+      </div>
+
+      <section class="section active" id="overview"></section>
+      <section class="section" id="itinerary"></section>
+      <section class="section" id="tours"></section>
+      <section class="section" id="hotels"></section>
+      <section class="section" id="decisions"></section>
+      <section class="section" id="dining"></section>
+      <section class="section" id="notes"></section>
+    </main>
+  </div>
+
+  <script>
+    const stateKey = "japan-korea-dashboard-v1";
+    const saved = JSON.parse(localStorage.getItem(stateKey) || "{}");
+
+    const tabs = [
+      ["overview", "Overview", "#"],
+      ["itinerary", "Itinerary", "D"],
+      ["tours", "Tours", "T"],
+      ["hotels", "Hotels", "H"],
+      ["decisions", "Decisions", "!"],
+      ["dining", "Dining", "R"],
+      ["notes", "Notes", "N"]
+    ];
+
+    const tripStops = [
+      { place: "Kyoto", dates: "Aug 20-24", who: "Lewis-only", nights: 4 },
+      { place: "Hiroshima", dates: "Aug 22", who: "Lewis-only", nights: 0 },
+      { place: "Tokyo", dates: "Aug 24-29", who: "Split", nights: 5 },
+      { place: "Sapporo", dates: "Aug 29-31", who: "All four", nights: 2 },
+      { place: "Lake Toya", dates: "Aug 31-Sep 2", who: "All four", nights: 2 },
+      { place: "Hakodate", dates: "Sep 2-3", who: "All four", nights: 1 },
+      { place: "The World", dates: "Sep 3-15", who: "All four", nights: 12 },
+      { place: "Seoul", dates: "Sep 15-17", who: "All four", nights: 2 }
+    ];
+
+    const itinerary = [
+      { date: "Aug 20", base: "Kyoto", who: "Lewis-only", travel: "Arrive Tokyo by plane; train Tokyo to Kyoto", agenda: "Arrival and transfer day. Easy dinner, light evening if energy allows." },
+      { date: "Aug 21", base: "Kyoto", who: "Lewis-only", travel: "Local Kyoto touring", agenda: "Kyoto cultural day: tea ceremony, Higashiyama, Kiyomizu-dera, Gion, or garden/temple walk." },
+      { date: "Aug 22", base: "Kyoto / Hiroshima", who: "Lewis-only", travel: "Train Kyoto to Hiroshima, about 1 hr 40 min to 2 hr each way", agenda: "Hiroshima day trip. Keep Miyajima optional if the group wants a longer day." },
+      { date: "Aug 23", base: "Kyoto", who: "Lewis-only", travel: "Local Kyoto touring", agenda: "Arashiyama bamboo forest, rickshaw, Fushimi Inari, or quieter temple/garden day." },
+      { date: "Aug 24", base: "Tokyo", who: "Lewis-only", travel: "Train Kyoto to Tokyo", agenda: "Check into Tokyo hotel. Shibuya, Ebisu, or Daikanyama evening." },
+      { date: "Aug 25", base: "Tokyo", who: "Lewis-only", travel: "Local Tokyo touring", agenda: "Brad/Evan favorites: Shibuya Crossing/Sky, Daikanyama Tsutaya, Ebisu, casual favorite dinner." },
+      { date: "Aug 26", base: "Tokyo", who: "All four", travel: "Goldblatts arrive Tokyo", agenda: "Lewis morning flexible. Easy shared welcome dinner." },
+      { date: "Aug 27", base: "Tokyo", who: "All four", travel: "Local Tokyo touring", agenda: "Old Tokyo/gardens private guide: Asakusa, Nezu/Yanaka, Koishikawa Korakuen or Hamarikyu." },
+      { date: "Aug 28", base: "Tokyo", who: "All four", travel: "Local Tokyo touring", agenda: "Skip sumo lunch/show. Use the day for gardens, old Tokyo, refined lunch, omakase, or cocktail anchor." },
+      { date: "Aug 29", base: "Sapporo", who: "All four", travel: "Fly Tokyo to New Chitose; transfer to Sapporo", agenda: "Arrive Sapporo. Seafood, ramen, easy city walk, optional beer if convenient." },
+      { date: "Aug 30", base: "Sapporo / Otaru / Yoichi", who: "All four", travel: "Train or driver for Otaru and Yoichi", agenda: "Whisky-forward day: Nikka Yoichi, Otaru canal, seafood, optional Sapporo evening." },
+      { date: "Aug 31", base: "Lake Toya", who: "All four", travel: "Train Sapporo to Toya Station; local transfer to lake", agenda: "Check in for lake wellness/onsen stay. Relaxed hotel dinner." },
+      { date: "Sep 1", base: "Lake Toya", who: "All four", travel: "Local nature / hotel day", agenda: "Spa, lake walks, possible light hiking, boat/lake views, relaxed evening." },
+      { date: "Sep 2", base: "Hakodate", who: "All four", travel: "Train Toya to Hakodate", agenda: "Hakodate waterfront, Motomachi, Mt. Hakodate night view." },
+      { date: "Sep 3", base: "The World / Hakodate", who: "All four", travel: "Transfer to Hakodate port", agenda: "Board The World. Ship is ported in Hakodate for one night." },
+      { date: "Sep 4-14", base: "The World", who: "All four", travel: "Cruise itinerary", agenda: "Cruise stops include Hakodate, Akita, Niigata, Captain's Choice, Sokcho-si." },
+      { date: "Sep 15", base: "Seoul", who: "All four", travel: "Disembark Korea; private transfer to Seoul", agenda: "Check in. Light Seoul evening." },
+      { date: "Sep 16", base: "Seoul", who: "All four", travel: "Local Seoul touring", agenda: "Palace, Bukchon Hanok Village, Insa-dong, shopping/cafes, polished dinner or lounge." },
+      { date: "Sep 17/18", base: "In transit", who: "All four", travel: "Fly Seoul/Incheon to SFO", agenda: "Return home." }
+    ];
+
+    const tours = [
+      { id: "kyoto-walk", date: "Aug 21", place: "Kyoto", who: "Lewis-only", title: "Private Kyoto cultural walk", channel: "Amex hotel concierge or private guide; Viator backup", cost: "$250-$500 total, or Viator-style $50-$90 pp", priority: "Must-book", status: "Need quote", why: "Sets the tone and avoids random temple hopping. Ask for Higashiyama, Kiyomizu-dera, Gion, and one strong garden/temple route." },
+      { id: "tea", date: "Aug 21 or 23", place: "Kyoto", who: "Lewis-only", title: "Tea ceremony", channel: "Concierge first; Viator backup", cost: "$36 pp simple, about $98 pp with kimono", priority: "Must-book", status: "Researching", why: "Best as a standalone cultural moment, not buried inside a long tour." },
+      { id: "arashiyama", date: "Aug 23", place: "Kyoto / Arashiyama", who: "Lewis-only", title: "Bamboo forest plus rickshaw", channel: "Viator or direct Ebisuya-style local operator", cost: "$84-$136 pp", priority: "Must-book", status: "Researching", why: "Short, scenic, memorable, and directly on the wishlist." },
+      { id: "hiroshima", date: "Aug 22", place: "Hiroshima", who: "Lewis-only", title: "Private Peace Memorial Park context guide", channel: "Viator or private Hiroshima guide", cost: "$76-$85 pp plus train", priority: "Must-book", status: "Researching", why: "A guide adds real value for the history. Keep Miyajima optional unless energy is high." },
+      { id: "tokyo-old", date: "Aug 27", place: "Tokyo", who: "All four", title: "Old Tokyo and gardens private guide", channel: "Viator or concierge", cost: "$52-$86 pp, or concierge quote", priority: "Must-book", status: "Researching", why: "Best shared Tokyo guide block: Asakusa, Nezu/Yanaka, Koishikawa Korakuen or Hamarikyu." },
+      { id: "sumo", date: "Aug 28", place: "Tokyo", who: "All four", title: "Sumo lunch/show", channel: "Do not book", cost: "$106-$115 pp if reconsidered", priority: "Skip", status: "Skipped", why: "Too staged and touristy for the group taste. Replace with gardens, old Tokyo, refined lunch, cocktails, or omakase." },
+      { id: "otaru", date: "Aug 30", place: "Sapporo / Otaru / Yoichi", who: "All four", title: "Otaru plus Nikka Yoichi whisky day", channel: "Private car/guide or concierge-arranged logistics", cost: "From $558 per group private; group version about $160 pp", priority: "Must-book", status: "Researching", why: "Logistics matter here and whisky is the priority over beer." },
+      { id: "toya", date: "Sep 1", place: "Lake Toya", who: "All four", title: "Mt. Usu / Showa-Shinzan or lake nature logistics", channel: "Hotel concierge / local transfer", cost: "$200-$400 total planning budget", priority: "Maybe", status: "Hold", why: "Keep light. This is a wellness reset, not a heavy touring day." },
+      { id: "hakodate", date: "Sep 2", place: "Hakodate", who: "All four", title: "Motomachi, waterfront, Mt. Hakodate", channel: "Self-guided or hotel transfer", cost: "$0 guide; private guide about $269 pp if needed", priority: "Maybe", status: "Hold", why: "Hakodate is manageable and the ship may duplicate some sights." },
+      { id: "seoul", date: "Sep 16", place: "Seoul", who: "All four", title: "Palace, Bukchon, Insa-dong walk", channel: "Viator or hotel concierge", cost: "$65-$88 pp small group; private full day about $250 pp", priority: "Must-book", status: "Researching", why: "Best compact Seoul overview. Avoid a bloated all-day route." }
+    ];
+
+    const hotels = [
+      { stop: "Kyoto", hotel: "Four Seasons Hotel Kyoto", range: "$1,200-$2,000+", position: "5-star luxury garden oasis", fit: "Excellent wellness, service, garden setting, and access to temples/Gion." },
+      { stop: "Kyoto", hotel: "HOTEL THE MITSUI KYOTO", range: "$1,200-$1,500+", position: "Marriott Luxury Collection", fit: "Modern Kyoto luxury, elegant, calm, central, strong points angle." },
+      { stop: "Kyoto", hotel: "Six Senses Kyoto", range: "$1,065-$3,350+", position: "5-star wellness hotel", fit: "Strong wellness/spa identity and aligned with David/Tiffanie style." },
+      { stop: "Kyoto", hotel: "The Hotel Seiryu Kyoto Kiyomizu", range: "$540-$750+", position: "High-end boutique", fit: "Wonderful Higashiyama location and old-Kyoto atmosphere." },
+      { stop: "Tokyo", hotel: "Cerulean Tower Tokyu Hotel", range: "$400-$1,000+", position: "Luxury high-rise, Shibuya", fit: "Clearest Shibuya fit if Brad wants the Crossing area." },
+      { stop: "Tokyo", hotel: "The Prince Gallery Tokyo Kioicho", range: "$470-$925+", position: "5-star Marriott luxury", fit: "Excellent views and points strategy; quieter than Shibuya." },
+      { stop: "Sapporo", hotel: "InterContinental Sapporo", range: "$380-$520+", position: "5-star/new luxury", fit: "Best luxury-style base for Sapporo if available." },
+      { stop: "Lake Toya", hotel: "The Lake Suite Ko no Sumika", range: "TBD premium", position: "Luxury lake-view onsen suites", fit: "Intimate suite/onsen feel, strong for wellness and views." },
+      { stop: "Lake Toya", hotel: "The Windsor Hotel Toya", range: "TBD", position: "Luxury resort", fit: "Grand resort with larger property, views, and dining infrastructure." },
+      { stop: "Lake Toya", hotel: "The Lake View TOYA Nonokaze Resort", range: "$350-$800+", position: "Upscale lake-view onsen", fit: "Strong lake-view onsen option; all rooms oriented to Lake Toya feel." },
+      { stop: "Hakodate", hotel: "Nipponia Hotel Hakodate Minatomachi", range: "TBD", position: "Historic boutique", fit: "Atmospheric port-city stay before boarding The World." },
+      { stop: "Seoul", hotel: "Four Seasons Hotel Seoul", range: "$430-$640+", position: "5-star luxury", fit: "Best polished luxury choice for short Seoul stay." },
+      { stop: "Seoul", hotel: "Signiel Seoul", range: "$500-$800+", position: "5-star high-rise", fit: "Best skyline-and-view choice." },
+      { stop: "Seoul", hotel: "Josun Palace", range: "$465-$556+", position: "Luxury Collection", fit: "Strong if Marriott points or elite benefits are attractive." }
+    ];
+
+    const decisions = [
+      { id: "kyoto-hotel", title: "Kyoto hotel ranking", detail: "Rank Four Seasons, Mitsui, Six Senses, and Seiryu." },
+      { id: "tokyo-hotel", title: "Tokyo hotel strategy", detail: "Choose Shibuya convenience versus quieter luxury/points such as Prince Gallery." },
+      { id: "lake-hotel", title: "Lake Toya hotel choice", detail: "Compare Ko no Sumika, Windsor Toya, and Nonokaze Resort." },
+      { id: "hiroshima-scope", title: "Hiroshima scope", detail: "Default to Hiroshima-focused. Miyajima only if energy and timing support a longer day." },
+      { id: "tour-booking", title: "Tours to book", detail: "Lock private Kyoto, Hiroshima guide, Tokyo old-town/gardens, Otaru/Yoichi, and Seoul." },
+      { id: "dining-anchors", title: "Dining anchors", detail: "Pick two or three serious dining/bar experiences across Kyoto, Tokyo, Sapporo, and Seoul." },
+      { id: "sumo-skip", title: "Sumo lunch/show", detail: "Currently skipped because it feels too staged and touristy for the group." }
+    ];
+
+    const dining = [
+      { place: "Kyoto", bars: "Four Seasons Kyoto bars; THE GARDEN BAR at Hotel The Mitsui; Nine Tails at Six Senses Kyoto.", dinner: "Four Seasons EMBA Kyoto Grill; TOKI at Hotel The Mitsui; Sekki at Six Senses; one refined Kyoto dinner.", use: "One elegant dinner, one cultural food moment, rest flexible." },
+      { place: "Tokyo", bars: "BELLOVISTO; The SG Club or The Bellwood; Prince Gallery Levita or Illumiid.", dinner: "One serious sushi/omakase; WASHOKU SOUTEN; casual Ebisu/Shibuya night.", use: "Tokyo should carry the main omakase/cocktail anchor." },
+      { place: "Sapporo", bars: "Classic cocktail bar; hotel lounge backup; beer only if convenient.", dinner: "Seafood/sushi, crab, miso ramen, izakaya-style Hokkaido dinner; Yoichi whisky day.", use: "Whisky and seafood over beer as the priority." },
+      { place: "Lake Toya", bars: "Hotel lounges/bars at Ko no Sumika, Windsor, or Nonokaze.", dinner: "Hotel-based kaiseki/resort dinner.", use: "Treat both nights as wellness and lake-view dining." },
+      { place: "Hakodate", bars: "Low-key waterfront drink or hotel bar if available.", dinner: "Morning Market seafood; casual seafood dinner.", use: "Pre-cruise should be easy and not overbuilt." },
+      { place: "Seoul", bars: "Charles H. at Four Seasons; hotel lounges at Four Seasons, Signiel, or Josun Palace.", dinner: "Yu Yuan or Akira Back; refined Korean dinner or curated BBQ.", use: "One polished dinner/bar pairing is enough for two nights." }
+    ];
+
+    let activeFilter = "all";
+    let query = "";
+
+    function save() {
+      localStorage.setItem(stateKey, JSON.stringify(saved));
+    }
+
+    function getStatus(id, fallback) {
+      return saved.statuses?.[id] || fallback || "Researching";
+    }
+
+    function setStatus(id, value) {
+      saved.statuses = saved.statuses || {};
+      saved.statuses[id] = value;
+      save();
+    }
+
+    function getDecision(id) {
+      return saved.decisions?.[id] || "Open";
+    }
+
+    function setDecision(id, value) {
+      saved.decisions = saved.decisions || {};
+      saved.decisions[id] = value;
+      save();
+    }
+
+    function matches(item) {
+      const hay = JSON.stringify(item).toLowerCase();
+      const qOk = !query || hay.includes(query.toLowerCase());
+      if (!qOk) return false;
+      if (activeFilter === "all") return true;
+      return hay.includes(activeFilter.toLowerCase());
+    }
+
+    function pill(text) {
+      const cls = text === "Must-book" ? "green" : text === "Skip" ? "red" : text === "Maybe" ? "gold" : text === "All four" ? "plum" : text === "Lewis-only" ? "blue" : "muted";
+      return `<span class="pill ${cls}">${text}</span>`;
+    }
+
+    function renderNav() {
+      document.getElementById("nav").innerHTML = tabs.map(([id, label, icon]) => `
+        <button class="nav-btn ${id === "overview" ? "active" : ""}" data-tab="${id}">
+          <span class="nav-icon">${icon}</span><span>${label}</span>
+        </button>
+      `).join("");
+
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById(btn.dataset.tab).classList.add("active");
+        });
+      });
+    }
+
+    function renderOverview() {
+      const mustBook = tours.filter(t => t.priority === "Must-book").length;
+      const skipped = tours.filter(t => t.priority === "Skip").length;
+      const openDecisions = decisions.filter(d => getDecision(d.id) !== "Decided").length;
+      document.getElementById("overview").innerHTML = `
+        <div class="grid">
+          <div class="panel span-3 metric"><strong>29</strong><span>calendar days including flights and cruise</span></div>
+          <div class="panel span-3 metric"><strong>${mustBook}</strong><span>recommended tour blocks</span></div>
+          <div class="panel span-3 metric"><strong>${openDecisions}</strong><span>open planning decisions</span></div>
+          <div class="panel span-3 metric"><strong>${skipped}</strong><span>experience intentionally skipped</span></div>
+          <div class="panel span-12">
+            <h3>Route</h3>
+            <div class="map-strip">
+              ${tripStops.map(s => `
+                <div class="stop">
+                  <strong>${s.place}</strong>
+                  <small>${s.dates}</small>
+                  <div>${pill(s.who)}</div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+          <div class="panel span-7">
+            <h3>Current Planning Read</h3>
+            <p>Keep the plan selective: private Kyoto context, meaningful Hiroshima history, old Tokyo/gardens, whisky-forward Hokkaido, and a compact Seoul cultural walk. Skip the sumo lunch/show because it is too staged for the group taste.</p>
+          </div>
+          <div class="panel span-5">
+            <h3>Next Best Move</h3>
+            <p>Ask Amex or hotel concierges for private-guide quotes, then use Viator as the benchmark. If concierge is polished and reasonable, use concierge. If vague or overpriced, book the cleanest public option.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderItinerary() {
+      const rows = itinerary.filter(matches);
+      document.getElementById("itinerary").innerHTML = `
+        <div class="timeline">
+          ${rows.length ? rows.map(d => `
+            <article class="day">
+              <div class="day-date">${d.date}<small>${d.who}</small></div>
+              <div>
+                <div class="meta">${pill(d.base)} ${pill(d.who)}</div>
+                <h3>${d.travel}</h3>
+                <p>${d.agenda}</p>
+              </div>
+            </article>
+          `).join("") : `<div class="empty">No itinerary rows match this view.</div>`}
+        </div>
+      `;
+    }
+
+    function renderTours() {
+      const rows = tours.filter(matches);
+      document.getElementById("tours").innerHTML = `
+        <div class="cards">
+          ${rows.length ? rows.map(t => `
+            <article class="card">
+              <div class="meta">${pill(t.priority)} ${pill(t.who)} ${pill(t.place)}</div>
+              <h3>${t.title}</h3>
+              <div class="body-text"><strong>${t.date}</strong> - ${t.why}</div>
+              <div class="body-text"><strong>Channel:</strong> ${t.channel}</div>
+              <div class="cost">${t.cost}</div>
+              <div class="status-row">
+                <span class="body-text">Status</span>
+                <select class="select" data-status="${t.id}">
+                  ${["Researching","Need quote","Hold","Shortlist","Booked","Skipped"].map(s => `<option ${getStatus(t.id, t.status) === s ? "selected" : ""}>${s}</option>`).join("")}
+                </select>
+              </div>
+            </article>
+          `).join("") : `<div class="empty">No tours match this view.</div>`}
+        </div>
+      `;
+      document.querySelectorAll("[data-status]").forEach(sel => {
+        sel.addEventListener("change", () => setStatus(sel.dataset.status, sel.value));
+      });
+    }
+
+    function renderHotels() {
+      const rows = hotels.filter(matches);
+      document.getElementById("hotels").innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Stop</th><th>Hotel</th><th>Positioning</th><th>Approx. Cost</th><th>Why It Fits</th></tr></thead>
+            <tbody>
+              ${rows.map(h => `<tr><td>${h.stop}</td><td><strong>${h.hotel}</strong></td><td>${h.position}</td><td>${h.range}</td><td>${h.fit}</td></tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderDecisions() {
+      const rows = decisions.filter(matches);
+      document.getElementById("decisions").innerHTML = `
+        <div class="decision-list">
+          ${rows.map(d => `
+            <article class="decision">
+              <div><strong>${d.title}</strong><span>${d.detail}</span></div>
+              <select class="select" data-decision="${d.id}">
+                ${["Open","Discuss","Leaning","Decided","Deferred"].map(s => `<option ${getDecision(d.id) === s ? "selected" : ""}>${s}</option>`).join("")}
+              </select>
+            </article>
+          `).join("")}
+        </div>
+      `;
+      document.querySelectorAll("[data-decision]").forEach(sel => {
+        sel.addEventListener("change", () => {
+          setDecision(sel.dataset.decision, sel.value);
+          renderOverview();
+        });
+      });
+    }
+
+    function renderDining() {
+      const rows = dining.filter(matches);
+      document.getElementById("dining").innerHTML = `
+        <div class="cards">
+          ${rows.map(d => `
+            <article class="card">
+              <div class="meta">${pill(d.place)}</div>
+              <h3>${d.place}</h3>
+              <div class="body-text"><strong>Bars / lounges:</strong> ${d.bars}</div>
+              <div class="body-text"><strong>Dinner:</strong> ${d.dinner}</div>
+              <div class="body-text"><strong>Use:</strong> ${d.use}</div>
+            </article>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderNotes() {
+      const notes = saved.notes || "";
+      document.getElementById("notes").innerHTML = `
+        <div class="grid">
+          <div class="panel span-8">
+            <h3>Working Notes</h3>
+            <textarea id="notesBox" class="note-box" placeholder="Add meeting notes, questions for Amex, concierge replies, booking links, or preferences here.">${notes}</textarea>
+            <div class="mini-actions">
+              <button class="action" id="clearNotes">Clear</button>
+              <button class="action primary" id="saveNotes">Save Notes</button>
+            </div>
+          </div>
+          <div class="panel span-4">
+            <h3>Questions To Answer</h3>
+            <p>Which Kyoto hotel wins? Is Hiroshima focused or Hiroshima plus Miyajima? Which Tokyo hotel strategy feels right? What are the two or three dinner anchors? Which concierge quotes beat Viator?</p>
+          </div>
+        </div>
+      `;
+      document.getElementById("saveNotes").addEventListener("click", () => {
+        saved.notes = document.getElementById("notesBox").value;
+        save();
+      });
+      document.getElementById("clearNotes").addEventListener("click", () => {
+        document.getElementById("notesBox").value = "";
+        saved.notes = "";
+        save();
+      });
+    }
+
+    function renderAll() {
+      renderOverview();
+      renderItinerary();
+      renderTours();
+      renderHotels();
+      renderDecisions();
+      renderDining();
+      renderNotes();
+    }
+
+    renderNav();
+    renderAll();
+
+    document.getElementById("search").addEventListener("input", e => {
+      query = e.target.value;
+      renderItinerary();
+      renderTours();
+      renderHotels();
+      renderDecisions();
+      renderDining();
+    });
+
+    document.querySelectorAll("#quickFilters button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#quickFilters button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        renderItinerary();
+        renderTours();
+        renderHotels();
+        renderDecisions();
+        renderDining();
+      });
+    });
+  </script>
+</body>
+</html>
