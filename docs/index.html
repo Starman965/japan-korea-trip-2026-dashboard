@@ -1097,15 +1097,20 @@
     ];
 
     const decisions = [
-      { id: "date-alignment", title: "Reservation date alignment", detail: "Confirmed Lewis-party hotel dates align: Kyoto Aug 20-24, Tokyo Aug 24-29, Sapporo Aug 29-31, Lake Toya Aug 31-Sep 2, Hakodate Sep 2-3, cruise Sep 3-15, Seoul Sep 15-17. Goldblatt Lake Toya dates also align with the shared Lake Toya stay, Aug 31-Sep 2." },
-      { id: "kyoto-hotel", title: "Kyoto hotel", detail: "Booked: Four Seasons Hotel Kyoto, confirmation 70737SG045996, Premier Room with Heritage Garden." },
-      { id: "tokyo-hotel", title: "Tokyo hotel", detail: "Booked: The Prince Gallery Tokyo Kioicho in two back-to-back reservations, confirmations 82443421 and 82448437, both Grand Deluxe Corner King with Club Lounge access." },
-      { id: "lake-hotel", title: "Lewis Lake Toya hotel", detail: "Booked: The LakeSuite KOnoSUMIKA, confirmation T50FDE2B83717, Corner Terrace Room with open-air hot spring bath." },
-      { id: "goldblatt-lake-hotel", title: "Goldblatt Lake Toya hotel", detail: "Booked: The LakeSuite KOnoSUMIKA, confirmation T93CCEFB28CC3, Terrace Room with open-air hot spring bath." },
-      { id: "hakodate-hotel", title: "Hakodate hotel", detail: "Booked: La Vista Hakodate Bay, confirmation 20260525176346028, Deluxe Twin Room Non Smoking." },
-      { id: "hiroshima-scope", title: "Hiroshima scope", detail: "Default to Hiroshima-focused. Miyajima only if energy and timing support a longer day." },
-      { id: "tour-booking", title: "Tours to book", detail: "Lock private Kyoto, Hiroshima guide, Tokyo old-town/gardens, Otaru/Yoichi, and Seoul." },
-      { id: "dining-anchors", title: "Dining anchors", detail: "Pick two or three serious dining/bar experiences across Kyoto, Tokyo, Sapporo, and Seoul." }
+      { id: "date-alignment", title: "Reservation date alignment", status: "Decided", detail: "Confirmed Lewis-party hotel dates align: Kyoto Aug 20-24, Tokyo Aug 24-29, Sapporo Aug 29-31, Lake Toya Aug 31-Sep 2, Hakodate Sep 2-3, cruise Sep 3-15, Seoul Sep 15-17. Goldblatt Lake Toya dates also align with the shared Lake Toya stay, Aug 31-Sep 2." },
+      { id: "lewis-hotels", title: "Lewis hotel spine", status: "Decided", detail: "Booked end-to-end: Four Seasons Kyoto, The Prince Gallery Tokyo, InterContinental Sapporo, The LakeSuite KOnoSUMIKA, La Vista Hakodate Bay, and Four Seasons Seoul." },
+      { id: "kyoto-hotel", title: "Lewis Kyoto hotel", status: "Decided", detail: "Booked: Four Seasons Hotel Kyoto, confirmation 70737SG045996, Premier Room with Heritage Garden." },
+      { id: "tokyo-hotel", title: "Lewis Tokyo hotel", status: "Decided", detail: "Booked: The Prince Gallery Tokyo Kioicho in two back-to-back reservations, confirmations 82443421 and 82448437, both Grand Deluxe Corner King with Club Lounge access." },
+      { id: "sapporo-hotel", title: "Lewis Sapporo hotel", status: "Decided", detail: "Booked: InterContinental Sapporo, confirmation 28046410, Premium Room with 1 King Bed and Club Lounge access." },
+      { id: "lake-hotel", title: "Lewis Lake Toya hotel", status: "Decided", detail: "Booked: The LakeSuite KOnoSUMIKA, confirmation T50FDE2B83717, Corner Terrace Room with open-air hot spring bath." },
+      { id: "goldblatt-lake-hotel", title: "Goldblatt Lake Toya hotel", status: "Decided", detail: "Booked separately at the same Lake Toya hotel and dates: The LakeSuite KOnoSUMIKA, confirmation T93CCEFB28CC3, Terrace Room with open-air hot spring bath." },
+      { id: "hakodate-hotel", title: "Lewis Hakodate hotel", status: "Decided", detail: "Booked: La Vista Hakodate Bay, confirmation 20260525176346028, Deluxe Twin Room Non Smoking for the Sep 2-3 pre-cruise bridge night." },
+      { id: "seoul-hotel", title: "Lewis Seoul hotel", status: "Decided", detail: "Booked: Four Seasons Hotel Seoul, confirmation 67115SG164620, Club Room with 1 King Bed." },
+      { id: "goldblatt-remaining-hotels", title: "Goldblatt remaining hotel confirmations", status: "Deferred", detail: "Only Brad's Lake Toya confirmation is tracked so far. Add other Goldblatt hotel confirmation numbers, room types, and cancellation details when those emails are forwarded." },
+      { id: "hiroshima-scope", title: "Hiroshima scope", status: "Leaning", detail: "Default to Hiroshima-focused. Miyajima remains optional only if energy and timing support a longer day." },
+      { id: "tour-booking", title: "Tours to book", status: "Discuss", detail: "Next booking focus: private Kyoto, Hiroshima guide, Tokyo old-town/gardens, Otaru/Yoichi, and Seoul. Compare concierge quotes against Viator." },
+      { id: "dining-anchors", title: "Dining anchors", status: "Discuss", detail: "Pick two or three serious dining/bar experiences across Kyoto, Tokyo, Sapporo, and Seoul; keep other nights flexible." },
+      { id: "concierge-outreach", title: "Concierge outreach", status: "Open", detail: "Use confirmed hotel reservations to ask concierges for private-guide quotes, dinner recommendations, airport/station transfers, and any room-linking notes." }
     ];
 
     const dining = [
@@ -1135,7 +1140,8 @@
     }
 
     function getDecision(id) {
-      return saved.decisions?.[id] || "Open";
+      const decision = decisions.find(d => d.id === id);
+      return saved.decisions?.[id] || decision?.status || "Open";
     }
 
     function setDecision(id, value) {
@@ -1403,7 +1409,7 @@
           </div>
           <div class="panel span-4">
             <h3>Questions To Answer</h3>
-            <p>Which Kyoto hotel wins? Is Hiroshima focused or Hiroshima plus Miyajima? Which Tokyo hotel strategy feels right? What are the two or three dinner anchors? Which concierge quotes beat Viator?</p>
+            <p>Remaining live questions: Hiroshima only or Hiroshima plus Miyajima, which private tours to lock first, which dinner anchors are worth planning around, which concierge quotes beat Viator, and when to add the rest of the Goldblatt hotel confirmations.</p>
           </div>
         </div>
       `;
